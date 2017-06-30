@@ -1,7 +1,6 @@
 package com.redrocket.photoeditor.screens.presentation.gallery.view;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -14,9 +13,12 @@ import com.redrocket.photoeditor.screens.presentation.gallery.structures.Preview
 
 import java.util.List;
 
+/**
+ * Экран галереи.
+ */
 public class GalleryActivity extends AppCompatActivity implements GalleryView {
 
-    private RecyclerView mRecyclerView;
+    private RecyclerView mPreviews;
     private GalleryAdapter mAdapter;
 
     private GalleryPresenter mPresenter;
@@ -26,16 +28,16 @@ public class GalleryActivity extends AppCompatActivity implements GalleryView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        mPreviews = (RecyclerView) findViewById(R.id.rv_previews);
+        mPreviews.setHasFixedSize(true);
 
         final int spanCount = getResources().getInteger(R.integer.gallery_span_count);
-
-        mRecyclerView.setLayoutManager(new GridLayoutManager(null, spanCount));
-        mRecyclerView.setHasFixedSize(true);
-        mAdapter = new GalleryAdapter(this);
-        mRecyclerView.setAdapter(mAdapter);
+        mPreviews.setLayoutManager(new GridLayoutManager(null, spanCount));
         final int spacing = getResources().getDimensionPixelOffset(R.dimen.gallery_preview_offset);
-        mRecyclerView.addItemDecoration(new OffsetItemDecorator(spanCount, spacing));
+        mPreviews.addItemDecoration(new OffsetItemDecorator(spanCount, spacing));
+
+        mAdapter = new GalleryAdapter(this);
+        mPreviews.setAdapter(mAdapter);
 
         mPresenter = new GalleryPresenterImpl();
         mPresenter.bindView(this);
@@ -47,7 +49,7 @@ public class GalleryActivity extends AppCompatActivity implements GalleryView {
     }
 
     @Override
-    public void openCrop(Uri image) {
+    public void openCrop(String image) {
         throw new UnsupportedOperationException();
     }
 

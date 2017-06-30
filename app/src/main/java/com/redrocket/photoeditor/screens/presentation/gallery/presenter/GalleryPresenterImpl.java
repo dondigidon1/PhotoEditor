@@ -2,9 +2,7 @@ package com.redrocket.photoeditor.screens.presentation.gallery.presenter;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.net.Uri;
 import android.provider.MediaStore;
-import android.util.Log;
 
 import com.redrocket.photoeditor.screens.presentation.gallery.structures.PreviewDescriptor;
 import com.redrocket.photoeditor.screens.presentation.gallery.view.GalleryView;
@@ -16,6 +14,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Реализация презентера для экрана галереи.
+ */
 public class GalleryPresenterImpl implements GalleryPresenter {
     private static final String TAG = "GalleryPresenterImpl";
 
@@ -31,34 +32,23 @@ public class GalleryPresenterImpl implements GalleryPresenter {
     }
 
     @Override
-    public void resume() {}
-
-    @Override
-    public void pause() {}
-
-    @Override
     public void destroy() {}
 
     @Override
-    public void onSelectImage(final Uri image) {
+    public void onSelectImage(final String image) {
         openCrop(image);
     }
 
-    private void openCrop(final Uri image) {
+    private void openCrop(final String image) {
         mView.openCrop(image);
     }
 
     private void updateImages() {
-        final List<PreviewDescriptor> images = getImages();
-        Log.i(TAG, "updateImages: "+images.size());
-        for (PreviewDescriptor image : images) {
-            Log.i(TAG, "updateImages: " + image.imagePath +" "+image.thumbPath);
-        }
-        mView.setImages(images);
+        mView.setImages(getImages());
     }
 
-    private List<PreviewDescriptor> getImages(){
-        final Map<Integer,String> imageIdToThumbPath=new HashMap<>();
+    private List<PreviewDescriptor> getImages() {
+        final Map<Integer, String> imageIdToThumbPath = new HashMap<>();
 
         final String[] thumbProj = {MediaStore.Images.Thumbnails.DATA,
                 MediaStore.Images.Thumbnails.IMAGE_ID};
@@ -80,18 +70,17 @@ public class GalleryPresenterImpl implements GalleryPresenter {
         }
 
         final String[] imageProj = {MediaStore.Images.Media._ID, MediaStore.Images.Media.DATA};
-        final String imageSelection = MediaStore.Images.Media.MIME_TYPE+" = ?";
+        final String imageSelection = MediaStore.Images.Media.MIME_TYPE + " = ?";
         final String[] imageSelectionArgs = new String[]{"image/jpeg"};
 
         final Cursor imageCursor = mContext.getContentResolver().query(
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                 imageProj, imageSelection, imageSelectionArgs,
-                MediaStore.Images.Media.DATE_MODIFIED+" DESC");
+                MediaStore.Images.Media.DATE_MODIFIED + " DESC");
 
-
+        // Важен порядок
         final Map<Integer, String> imageIdToImagePath = new LinkedHashMap<>();
         if (imageCursor != null) {
-
             while (imageCursor.moveToNext()) {
                 final int imageId = imageCursor.getInt(
                         imageCursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID));

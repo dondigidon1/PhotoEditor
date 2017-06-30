@@ -4,11 +4,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 /**
- * @TODO Class Description ...
+ * Описывает превью изображения.
  */
 public class PreviewDescriptor {
     public final String imagePath;
-
     public final String thumbPath;
 
     public PreviewDescriptor(@NonNull final String imagePath,
