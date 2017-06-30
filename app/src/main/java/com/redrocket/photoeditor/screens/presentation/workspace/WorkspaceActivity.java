@@ -1,4 +1,4 @@
-package com.redrocket.photoeditor.screens.view.workspace;
+package com.redrocket.photoeditor.screens.presentation.workspace;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
