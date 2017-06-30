@@ -37,10 +37,9 @@ public class GalleryPresenterTest {
     @Test
     public void firstTest() {
         when(mGalleryView.getContext()).thenReturn(mActivityTestRule.getActivity());
-
         GalleryPresenter presenter = new GalleryPresenterImpl();
-        presenter.bindView(mGalleryView);
 
+        presenter.bindView(mGalleryView);
         verify(mGalleryView, times(1)).setImages(any(List.class));
     }
 }

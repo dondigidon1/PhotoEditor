@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,16 +27,16 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @TODO Class Description ...
+ * Адаптер для галереи.
  */
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.PreviewHolder> {
     private static final String TAG = "GalleryAdapter";
-    private static final int PRELOAD_COUNT = 9;
 
     private final Context mContext;
 
     private List<PreviewDescriptor> mItems = new ArrayList<>();
-    private Map<String,Integer> mThumbPathToRotation = new HashMap<>();
+    // Угол поворота для изображения с миниатюрой
+    private Map<String, Integer> mThumbPathToRotation = new HashMap<>();
 
     GalleryAdapter(Context context) {
         mContext = context;
@@ -54,7 +53,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.PreviewH
             final int thumbRotation = getRotation(item.thumbPath);
 
             final int previewRotation = imageRotation - thumbRotation;
-            mThumbPathToRotation.put(item.thumbPath,previewRotation);
+            mThumbPathToRotation.put(item.thumbPath, previewRotation);
         }
         notifyDataSetChanged();
     }
@@ -73,15 +72,11 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.PreviewH
                 .placeholder(R.color.steelGray)
                 .priority(Priority.HIGH)
                 .into(holder.preview);
+    }
 
-//        final int preloadPos = position + PRELOAD_COUNT;
-//        if (preloadPos >= 0 && preloadPos < mItems.size()
-//                && holder.preview.getWidth() > 0
-//                && holder.preview.getHeight() > 0) {
-//            createRequest(preloadPos)
-//                    .priority(Priority.LOW)
-//                    .preload(holder.preview.getWidth(), holder.preview.getHeight());
-//        }
+    @Override
+    public int getItemCount() {
+        return mItems.size();
     }
 
     private BitmapRequestBuilder<String, Bitmap> createRequest(final int position) {
@@ -89,7 +84,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.PreviewH
                 mItems.get(position).thumbPath :
                 mItems.get(position).imagePath;
 
-        BitmapRequestBuilder<String,Bitmap> builder = Glide
+        BitmapRequestBuilder<String, Bitmap> builder = Glide
                 .with(mContext)
                 .load(previewPath)
                 .asBitmap()
@@ -121,19 +116,14 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.PreviewH
         }
 
         builder = builder
-                    .transform(transforms.toArray(new BitmapTransformation[transforms.size()]))
-                    .crossFade();
+                .transform(transforms.toArray(new BitmapTransformation[transforms.size()]))
+                .crossFade();
 
         return builder;
     }
 
-    @Override
-    public int getItemCount() {
-        return mItems.size();
-    }
+    private void handlePreviewClick(final int pos) {
 
-    private void handlePreviewClick(final int pos){
-        Log.i(TAG, "handlePreviewClick: "+pos);
     }
 
     class PreviewHolder extends RecyclerView.ViewHolder {

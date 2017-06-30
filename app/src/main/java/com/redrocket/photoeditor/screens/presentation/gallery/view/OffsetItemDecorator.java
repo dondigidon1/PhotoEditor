@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 /**
- * @TODO Class Description ...
+ * Реализует отступы между превьюшками в галерее.
  */
 public class OffsetItemDecorator extends RecyclerView.ItemDecoration {
     private int mSpanCount;
