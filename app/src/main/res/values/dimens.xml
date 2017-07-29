@@ -3,4 +3,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="gallery_preview_offset">2dp</dimen>
+
+    <dimen name="crop_thumb_radius">12dp</dimen>
+    <dimen name="crop_area_min_side">100dp</dimen>
 </resources>

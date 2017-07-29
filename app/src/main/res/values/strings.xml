@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">PhotoEditor</string>
+    <string name="app_name" translatable="false">PhotoEditor</string>
 
     <string name="gallery_title">Pick photo</string>
+    <string name="crop_title">Crop</string>
+
+    <string name="crop_menu_button_next_text">Next</string>
 </resources>

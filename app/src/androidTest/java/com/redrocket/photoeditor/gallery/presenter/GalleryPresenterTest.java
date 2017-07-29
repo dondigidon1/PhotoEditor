@@ -3,10 +3,10 @@ package com.redrocket.photoeditor.gallery.presenter;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.redrocket.photoeditor.screens.presentation.gallery.presenter.GalleryPresenter;
-import com.redrocket.photoeditor.screens.presentation.gallery.presenter.GalleryPresenterImpl;
-import com.redrocket.photoeditor.screens.presentation.gallery.view.GalleryActivity;
-import com.redrocket.photoeditor.screens.presentation.gallery.view.GalleryView;
+import com.redrocket.photoeditor.presentation.gallery.presenter.GalleryPresenter;
+import com.redrocket.photoeditor.presentation.gallery.presenter.GalleryPresenterImpl;
+import com.redrocket.photoeditor.presentation.gallery.view.GalleryActivity;
+import com.redrocket.photoeditor.presentation.gallery.view.GalleryView;
 
 import org.junit.Before;
 import org.junit.Rule;
