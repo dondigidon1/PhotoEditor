@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer name="gallery_span_count">3</integer>
+
+    <integer name="screen_transition_anim_duration">300</integer>
 </resources>

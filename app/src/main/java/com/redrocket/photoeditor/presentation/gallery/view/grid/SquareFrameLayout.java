@@ -1,0 +1,29 @@
+package com.redrocket.photoeditor.presentation.gallery.view.grid;
+
+import android.content.Context;
+import android.support.annotation.Nullable;
+import android.util.AttributeSet;
+import android.widget.FrameLayout;
+
+/**
+ * Квадратный лейаут.
+ */
+public class SquareFrameLayout extends FrameLayout {
+    private static final String TAG = "SquareFrameLayout";
+    public SquareFrameLayout(Context context) {
+        super(context);
+    }
+
+    public SquareFrameLayout(Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    public SquareFrameLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, widthMeasureSpec);
+    }
+}
