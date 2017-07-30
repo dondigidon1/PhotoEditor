@@ -20,4 +20,9 @@ public interface CropView extends MvpView {
      * @param crop Область кропа.
      */
     void setImage(String path, CropArea crop);
+
+    /**
+     * Отобразить контрол для возврата на предыдущий экран.
+     */
+    void showBackControl();
 }

@@ -22,6 +22,7 @@ public interface CropPresenter extends MvpPresenter<CropView> {
      * Установить начальные параметры.
      *
      * @param imagePath Путь к файлу с исходным изображением.
+     * @param fromAnotherApp Экран запущен сторонним приложение.
      */
-    void initialize(@Nullable String imagePath);
+    void initialize(@Nullable String imagePath, boolean fromAnotherApp);
 }

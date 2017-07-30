@@ -53,7 +53,7 @@ public class CropActivity extends AppCompatActivity implements CropView {
 
         mPresenter = new CropPresenterImpl(PhotoEditorApplication.getProject());
         String imagePath = getIntent().getStringExtra(EXTRA_IMAGE_PATH);
-        mPresenter.initialize(imagePath);
+        mPresenter.initialize(imagePath, false);
         mPresenter.bindView(this, savedInstanceState != null);
 
     }
@@ -77,6 +77,9 @@ public class CropActivity extends AppCompatActivity implements CropView {
             case R.id.action_next:
                 mPresenter.onNextClick(getCrop());
                 return true;
+            case android.R.id.home:
+                finish();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -99,6 +102,11 @@ public class CropActivity extends AppCompatActivity implements CropView {
                 setCrop(crop);
             }
         });
+    }
+
+    @Override
+    public void showBackControl() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void setCrop(CropArea crop) {

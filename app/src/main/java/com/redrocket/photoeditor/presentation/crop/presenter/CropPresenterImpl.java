@@ -16,6 +16,7 @@ public class CropPresenterImpl implements CropPresenter {
 
     private String mPath;
     private CropArea mCropArea;
+    private boolean mFromAnotherApp;
 
     private CropView mView;
 
@@ -24,12 +25,14 @@ public class CropPresenterImpl implements CropPresenter {
     }
 
     @Override
-    public void initialize(@Nullable String imagePath) {
+    public void initialize(@Nullable String imagePath, boolean fromAnotherApp) {
         if (imagePath != null)
             mProject.startPicture(imagePath);
 
         mPath = mProject.getPicture().getPath();
         mCropArea = mProject.getPicture().getCrop();
+
+        mFromAnotherApp = fromAnotherApp;
     }
 
     @Override
@@ -38,6 +41,9 @@ public class CropPresenterImpl implements CropPresenter {
 
         if (!isRestore)
             updateImage();
+
+        if (!mFromAnotherApp)
+            mView.showBackControl();
     }
 
     @Override
