@@ -6,4 +6,7 @@
 
     <color name="cadetBlueA80">#50b3bcc7</color>
     <color name="steelGray">#282636</color>
+
+    <color name="superYellow">#d97b00</color>
+    <color name="superYellowA60">#92d97b00</color>
 </resources>

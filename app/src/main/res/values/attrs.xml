@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="HighlightView">
+        <attr name="startColor" format="color"/>
+        <attr name="endColor" format="color"/>
+        <attr name="frameColor" format="color"/>
+        <attr name="frameWidth" format="dimension"/>
+    </declare-styleable>
+</resources>

@@ -1,9 +1,11 @@
 package com.redrocket.photoeditor.util;
 
+import java.io.Serializable;
+
 /**
  * Описывает область кропа.
  */
-public class CropArea {
+public class CropArea implements Serializable {
     private static final float MIN_FRACTION = 0f;
     private static final float MAX_FRACTION = 1f;
 
@@ -15,7 +17,7 @@ public class CropArea {
     /**
      * Конструктор с указанием границ кропа.
      * Пример:
-     * CropArea(0.5f,0.5f,1f, 1f) создаст область
+     * CropArea(0.5f, 0.5f, 1f, 1f) создаст область
      * выделяющую правую нижнюю часть прямоугольника.
      *
      * @param left   Начало кропа слева в долях.
@@ -38,6 +40,24 @@ public class CropArea {
         this.top = MIN_FRACTION;
         this.right = MAX_FRACTION;
         this.bottom = MAX_FRACTION;
+    }
+
+    /**
+     * Получить ширину области в долях от ширины изображения.
+     *
+     * @return Возвращает долю от 0 до 1.
+     */
+    public float width() {
+        return right - left;
+    }
+
+    /**
+     * Получить высоту области в долях от высоты изображения.
+     *
+     * @return Возвращает долю от 0 до 1.
+     */
+    public float height() {
+        return bottom - top;
     }
 
     @Override

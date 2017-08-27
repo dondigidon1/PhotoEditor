@@ -1,9 +1,10 @@
 package com.redrocket.photoeditor.presentation.crop.presenter;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.redrocket.photoeditor.business.Project;
-import com.redrocket.photoeditor.presentation.crop.view.CropView;
+import com.redrocket.photoeditor.presentation.crop.view.CropScreenView;
 import com.redrocket.photoeditor.util.CropArea;
 
 /**
@@ -12,13 +13,13 @@ import com.redrocket.photoeditor.util.CropArea;
 public class CropPresenterImpl implements CropPresenter {
     private static final String TAG = "CropPresenterImpl";
 
-    private Project mProject;
+    private final Project mProject;
 
     private String mPath;
     private CropArea mCropArea;
     private boolean mFromAnotherApp;
 
-    private CropView mView;
+    private CropScreenView mView;
 
     public CropPresenterImpl(Project project) {
         mProject = project;
@@ -36,7 +37,7 @@ public class CropPresenterImpl implements CropPresenter {
     }
 
     @Override
-    public void bindView(CropView view, boolean isRestore) {
+    public void bindView(CropScreenView view, boolean isRestore) {
         mView = view;
 
         if (!isRestore)
@@ -51,10 +52,20 @@ public class CropPresenterImpl implements CropPresenter {
     }
 
     @Override
-    public void onNextClick(CropArea crop) {
+    public void onNextClick(@NonNull CropArea crop) {
         mCropArea = crop;
         mProject.getPicture().setCrop(crop);
         mView.openEffectScreen();
+    }
+
+    @Override
+    public void onFileError() {
+        mView.showFileErrorMsg();
+    }
+
+    @Override
+    public void onCloseFileErrorMsg() {
+        mView.resetToGalleryScreen();
     }
 
     private void updateImage() {

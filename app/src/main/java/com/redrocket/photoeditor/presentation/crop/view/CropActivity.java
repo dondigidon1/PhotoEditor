@@ -2,8 +2,7 @@ package com.redrocket.photoeditor.presentation.crop.view;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Rect;
-import android.net.Uri;
+import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -12,22 +11,34 @@ import android.view.MenuItem;
 
 import com.redrocket.photoeditor.PhotoEditorApplication;
 import com.redrocket.photoeditor.R;
+import com.redrocket.photoeditor.presentation.common.FileErrorDialog;
 import com.redrocket.photoeditor.presentation.crop.presenter.CropPresenter;
 import com.redrocket.photoeditor.presentation.crop.presenter.CropPresenterImpl;
+import com.redrocket.photoeditor.presentation.crop.view.custom.CropViewFacade;
+import com.redrocket.photoeditor.presentation.effects.view.EffectActivity;
+import com.redrocket.photoeditor.presentation.gallery.view.GalleryActivity;
 import com.redrocket.photoeditor.util.CropArea;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
-import java.io.File;
+import java.io.IOException;
 
 /**
  * Реализация вью для экрана кропа.
  */
-public class CropActivity extends AppCompatActivity implements CropView {
+public class CropActivity
+        extends
+            AppCompatActivity
+        implements
+            CropScreenView,
+            CropViewFacade.LoadListener,
+            FileErrorDialog.OnDialogListener {
     private static final String TAG = "CropActivity";
 
     private static final String EXTRA_IMAGE_PATH = "EXTRA_IMAGE_PATH";
 
-    private CropImageView mCropPicture;
+    private static final String TAG_FILE_ERROR_DIALOG = "TAG_FILE_ERROR_DIALOG";
+
+    private CropViewFacade mCropPicture;
 
     private CropPresenter mPresenter;
 
@@ -49,19 +60,25 @@ public class CropActivity extends AppCompatActivity implements CropView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crop);
 
-        mCropPicture = (CropImageView) findViewById(R.id.crop_picture);
+        mCropPicture = new CropViewFacade((CropImageView) findViewById(R.id.crop_picture),
+                savedInstanceState, this);
 
         mPresenter = new CropPresenterImpl(PhotoEditorApplication.getProject());
         String imagePath = getIntent().getStringExtra(EXTRA_IMAGE_PATH);
         mPresenter.initialize(imagePath, false);
         mPresenter.bindView(this, savedInstanceState != null);
-
     }
 
     @Override
     public void finish() {
         super.finish();
         overridePendingTransition(R.anim.hold, R.anim.close);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mCropPicture.saveState(outState);
     }
 
     @Override
@@ -75,7 +92,7 @@ public class CropActivity extends AppCompatActivity implements CropView {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_next:
-                mPresenter.onNextClick(getCrop());
+                handleNextClick();
                 return true;
             case android.R.id.home:
                 finish();
@@ -84,24 +101,33 @@ public class CropActivity extends AppCompatActivity implements CropView {
         return super.onOptionsItemSelected(item);
     }
 
+    private void handleNextClick() {
+        try {
+            mPresenter.onNextClick(getCrop());
+        } catch (IOException e) {
+            onFileError();
+        }
+    }
+
+    @Override
+    public void onFileError() {
+        mPresenter.onFileError();
+    }
+
+    @Override
+    public void onDismiss() {
+        mPresenter.onCloseFileErrorMsg();
+    }
+
     @Override
     public Context getContext() {
         return this;
     }
 
     @Override
-    public void openEffectScreen() {
-    }
-
-    @Override
-    public void setImage(String path, final CropArea crop) {
-        mCropPicture.setImageUriAsync(Uri.fromFile(new File(path)));
-        mCropPicture.setOnSetImageUriCompleteListener(new CropImageView.OnSetImageUriCompleteListener() {
-            @Override
-            public void onSetImageUriComplete(CropImageView view, Uri uri, Exception error) {
-                setCrop(crop);
-            }
-        });
+    public void setImage(String path, CropArea crop) {
+        mCropPicture.setImage(path);
+        mCropPicture.setCropRect(new RectF(crop.left, crop.top, crop.right, crop.bottom));
     }
 
     @Override
@@ -109,27 +135,27 @@ public class CropActivity extends AppCompatActivity implements CropView {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    private void setCrop(CropArea crop) {
-        Rect imageRect = mCropPicture.getWholeImageRect();
-
-        int leftAbs = (int) (crop.left * imageRect.width());
-        int topAbs = (int) (crop.top * imageRect.height());
-        int rightAbs = (int) (crop.right * imageRect.width());
-        int bottomAbs = (int) (crop.bottom * imageRect.height());
-        Rect cropRect = new Rect(leftAbs, topAbs, rightAbs, bottomAbs);
-
-        mCropPicture.setCropRect(cropRect);
+    @Override
+    public void showFileErrorMsg() {
+        FileErrorDialog dialog = new FileErrorDialog();
+        dialog.setListener(this);
+        dialog.show(getSupportFragmentManager(), TAG_FILE_ERROR_DIALOG);
     }
 
-    private CropArea getCrop() {
-        Rect imageRect = mCropPicture.getWholeImageRect();
-        Rect cropRect = mCropPicture.getCropRect();
+    @Override
+    public void openEffectScreen() {
+        Intent intent = new Intent(this, EffectActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_enter, R.anim.slide_out_enter);
+    }
 
-        float leftRel = (float) cropRect.left / imageRect.width();
-        float topRel = (float) cropRect.top / imageRect.height();
-        float rightRel = (float) cropRect.right / imageRect.width();
-        float bottomRel = (float) cropRect.bottom / imageRect.height();
+    @Override
+    public void resetToGalleryScreen() {
+        startActivity(GalleryActivity.getCallingIntent(this));
+    }
 
-        return new CropArea(leftRel, topRel, rightRel, bottomRel);
+    private CropArea getCrop() throws IOException {
+        RectF rect = mCropPicture.getCropRect();
+        return new CropArea(rect.left, rect.top, rect.right, rect.bottom);
     }
 }
