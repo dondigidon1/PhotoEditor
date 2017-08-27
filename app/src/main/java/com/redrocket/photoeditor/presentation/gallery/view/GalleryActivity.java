@@ -1,6 +1,7 @@
 package com.redrocket.photoeditor.presentation.gallery.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -19,20 +20,33 @@ import java.util.List;
 /**
  * Экран галереи.
  */
-public class GalleryActivity extends AppCompatActivity implements GalleryView,
+public class GalleryActivity extends AppCompatActivity implements GalleryScreenView,
         GalleryAdapter.OnImageSelectListener {
+    private static final String TAG = "GalleryActivity";
 
-    private RecyclerView mPreviews;
     private GalleryAdapter mAdapter;
 
     private GalleryPresenter mPresenter;
+
+
+    /**
+     * Создать интент для экрана галереи.
+     *
+     * @param context Контекст.
+     * @return Возвращает интент.
+     */
+    public static Intent getCallingIntent(Context context) {
+        Intent intent = new Intent(context, GalleryActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        return intent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
 
-        mPreviews = (RecyclerView) findViewById(R.id.rv_previews);
+        RecyclerView mPreviews = (RecyclerView) findViewById(R.id.rv_previews);
         mPreviews.setHasFixedSize(true);
 
         final int spanCount = getResources().getInteger(R.integer.gallery_span_count);

@@ -6,7 +6,7 @@ import com.redrocket.photoeditor.util.CropArea;
 /**
  * Интерфейс вью для экрана кропа.
  */
-public interface CropView extends MvpView {
+public interface CropScreenView extends MvpView {
 
     /**
      * Запустить экран эффектов.
@@ -25,4 +25,14 @@ public interface CropView extends MvpView {
      * Отобразить контрол для возврата на предыдущий экран.
      */
     void showBackControl();
+
+    /**
+     * Показать сообщение о файловой ошибке.
+     */
+    void showFileErrorMsg();
+
+    /**
+     * Перейти на экран гелереи.
+     */
+    void resetToGalleryScreen();
 }

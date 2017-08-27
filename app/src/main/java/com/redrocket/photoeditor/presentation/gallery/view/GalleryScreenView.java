@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Интерфейс вью для экрана галереи.
  */
-public interface GalleryView extends MvpView {
+public interface GalleryScreenView extends MvpView {
 
     /**
      * Установать изображения.

@@ -13,6 +13,7 @@ public class PictureState {
 
     private String mSrc;
     private CropArea mCrop = new CropArea();
+    private int mEffect = 0;
 
     private transient OnUpdateListener mListener;
 
@@ -45,6 +46,7 @@ public class PictureState {
      *
      * @return Возвращает путь к файлу с изображением.
      */
+    @NonNull
     public String getPath() {
         return mSrc;
     }
@@ -68,6 +70,26 @@ public class PictureState {
      */
     public CropArea getCrop() {
         return mCrop;
+    }
+
+    /**
+     * Установить эффект.
+     *
+     * @param effectId Идентификатор эффекта.
+     */
+    public void setEffect(int effectId) {
+        mEffect = effectId;
+        if (mListener != null)
+            mListener.onUpdate();
+    }
+
+    /**
+     * Получить эффект.
+     *
+     * @return Возвращает идентификатор эффекта.
+     */
+    public int getEffect() {
+        return mEffect;
     }
 
     /**

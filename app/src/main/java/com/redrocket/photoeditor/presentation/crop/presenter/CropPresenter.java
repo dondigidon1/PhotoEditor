@@ -4,13 +4,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.redrocket.photoeditor.presentation.MvpPresenter;
+import com.redrocket.photoeditor.presentation.crop.view.CropScreenView;
 import com.redrocket.photoeditor.util.CropArea;
-import com.redrocket.photoeditor.presentation.crop.view.CropView;
 
 /**
  * Интерфейс презентера для экрана кропа.
  */
-public interface CropPresenter extends MvpPresenter<CropView> {
+public interface CropPresenter extends MvpPresenter<CropScreenView> {
     /**
      * Завершен выбор области кропа
      *
@@ -25,4 +25,14 @@ public interface CropPresenter extends MvpPresenter<CropView> {
      * @param fromAnotherApp Экран запущен сторонним приложение.
      */
     void initialize(@Nullable String imagePath, boolean fromAnotherApp);
+
+    /**
+     * Произошла ошибка при обращении к файлу в постоянной памяти.
+     */
+    void onFileError();
+
+    /**
+     * Диалог с файловой ошибкой закрылся.
+     */
+    void onCloseFileErrorMsg();
 }

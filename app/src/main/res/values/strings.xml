@@ -2,7 +2,16 @@
     <string name="app_name" translatable="false">PhotoEditor</string>
 
     <string name="gallery_title">Pick photo</string>
-    <string name="crop_title">Crop</string>
+    <string name="crop_title">Make crop</string>
+    <string name="effect_title">Choose effect</string>
 
-    <string name="crop_menu_button_next_text">Next</string>
+    <string name="menu_button_next_text">Next</string>
+
+    <string name="effect_original_name_text">Original</string>
+    <string name="effect_hue_name_text">Hue</string>
+    <string name="effect_grayscale_name_text">Grayscale</string>
+    <string name="effect_color_invert_name_text">ColorInvert</string>
+    <string name="effect_sepia_name_text">Sepia</string>
+
+    <string name="dialog_file_error_msg">There\'s no file.\nReturn to gallery.</string>
 </resources>

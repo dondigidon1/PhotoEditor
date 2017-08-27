@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.provider.MediaStore;
 
 import com.redrocket.photoeditor.presentation.gallery.structures.PreviewDescriptor;
-import com.redrocket.photoeditor.presentation.gallery.view.GalleryView;
+import com.redrocket.photoeditor.presentation.gallery.view.GalleryScreenView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,11 +20,11 @@ import java.util.Set;
 public class GalleryPresenterImpl implements GalleryPresenter {
     private static final String TAG = "GalleryPresenterImpl";
 
-    private GalleryView mView;
+    private GalleryScreenView mView;
     private Context mContext;
 
     @Override
-    public void bindView(GalleryView view, boolean isRestore) {
+    public void bindView(GalleryScreenView view, boolean isRestore) {
         mView = view;
         mContext = view.getContext();
 
