@@ -25,5 +25,8 @@
         <activity
             android:name=".presentation.effects.view.EffectActivity"
             android:label="@string/effect_title"/>
+        <activity
+            android:name=".presentation.stickers.view.StickerScreenActivity"
+            android:label="@string/sticker_title"/>
     </application>
 </manifest>

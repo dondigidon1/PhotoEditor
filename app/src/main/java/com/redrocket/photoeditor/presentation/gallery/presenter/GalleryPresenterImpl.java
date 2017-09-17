@@ -50,12 +50,12 @@ public class GalleryPresenterImpl implements GalleryPresenter {
     private List<PreviewDescriptor> getImages() {
         final Map<Integer, String> imageIdToThumbPath = new HashMap<>();
 
-        final String[] thumbProj = {MediaStore.Images.Thumbnails.DATA,
+        final String[] thumbProjection = {MediaStore.Images.Thumbnails.DATA,
                 MediaStore.Images.Thumbnails.IMAGE_ID};
         final Cursor thumbCursor = MediaStore.Images.Thumbnails.queryMiniThumbnails(
                 mContext.getContentResolver(), MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI,
                 MediaStore.Images.Thumbnails.MINI_KIND,
-                thumbProj);
+                thumbProjection);
 
         if (thumbCursor != null) {
             while (thumbCursor.moveToNext()) {
@@ -69,13 +69,13 @@ public class GalleryPresenterImpl implements GalleryPresenter {
             thumbCursor.close();
         }
 
-        final String[] imageProj = {MediaStore.Images.Media._ID, MediaStore.Images.Media.DATA};
+        final String[] imageProjection = {MediaStore.Images.Media._ID, MediaStore.Images.Media.DATA};
         final String imageSelection = MediaStore.Images.Media.MIME_TYPE + " = ?";
         final String[] imageSelectionArgs = new String[]{"image/jpeg"};
 
         final Cursor imageCursor = mContext.getContentResolver().query(
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                imageProj, imageSelection, imageSelectionArgs,
+                imageProjection, imageSelection, imageSelectionArgs,
                 MediaStore.Images.Media.DATE_MODIFIED + " DESC");
 
         // Важен порядок

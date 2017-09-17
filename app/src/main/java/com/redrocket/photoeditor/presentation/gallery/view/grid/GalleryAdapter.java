@@ -38,7 +38,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.PreviewH
 
     private List<PreviewDescriptor> mItems = new ArrayList<>();
     // Угол поворота для изображения с миниатюрой
-    private Map<String, Integer> mThumbPathToRotation = new HashMap<>();
+    private final Map<String, Integer> mThumbPathToRotation = new HashMap<>();
 
     public GalleryAdapter(@NonNull final Context context,
                           @NonNull final OnImageSelectListener listener) {
@@ -173,7 +173,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.PreviewH
     }
 
     class PreviewHolder extends RecyclerView.ViewHolder {
-        private ImageView preview;
+        private final ImageView preview;
 
         public PreviewHolder(View itemView) {
             super(itemView);

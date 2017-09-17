@@ -1,9 +1,11 @@
 <resources>
-    <string name="gallery_title">Выберите фотографию</string>
-    <string name="crop_title">Оставьте нужное</string>
-    <string name="effect_title">Выбирите эффект</string>
+    <string name="gallery_title">Выбери фотографию</string>
+    <string name="crop_title">Оставь только нужное</string>
+    <string name="effect_title">Выбери эффект</string>
+    <string name="sticker_title">Добавь эмоций</string>
 
     <string name="menu_button_next_text">Далее</string>
+    <string name="menu_button_save_text">Сохранить</string>
 
     <string name="dialog_file_error_msg">Отсутствует файл.\nВернуться в галерею.</string>
 </resources>

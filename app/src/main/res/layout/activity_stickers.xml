@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffff95"
+    tools:context="com.redrocket.photoeditor.presentation.stickers.view.StickerScreenActivity">
+
+    <ImageView
+        android:id="@+id/image_picture"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/rv_sticker_previews"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:adjustViewBounds="true"
+        android:alpha="0"
+        android:background="#5500FF00"
+        app:srcCompat="@drawable/emoji_rocket"
+        tools:alpha="1f"/>
+
+    <com.redrocket.photoeditor.presentation.stickers.view.stickerview.StickerBoard
+        android:id="@+id/sticker_board"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/image_picture"
+        app:layout_constraintLeft_toLeftOf="@id/image_picture"
+        app:layout_constraintRight_toRightOf="@id/image_picture"
+        app:layout_constraintTop_toTopOf="@id/image_picture"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_sticker_previews"
+        android:layout_width="368dp"
+        android:layout_height="200dp"
+        android:layout_marginBottom="6dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="#55FF0000"/>
+</android.support.constraint.ConstraintLayout>

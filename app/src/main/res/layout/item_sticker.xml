@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.redrocket.photoeditor.presentation.common.util.SquareFrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:background="#5500FF00"
+    android:foreground="@drawable/fg_sticker_preview">
 
     <ImageView
         android:id="@+id/image_preview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:adjustViewBounds="true" />
-
-    <Button
-        android:id="@+id/button_preview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/gallery_btn_preview" />
-
+        app:srcCompat="@mipmap/ic_launcher"/>
 </com.redrocket.photoeditor.presentation.common.util.SquareFrameLayout>

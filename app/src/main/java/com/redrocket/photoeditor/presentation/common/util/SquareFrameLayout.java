@@ -1,4 +1,4 @@
-package com.redrocket.photoeditor.presentation.gallery.view.grid;
+package com.redrocket.photoeditor.presentation.common.util;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
