@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <integer name="gallery_span_count">3</integer>
-
+    <integer name="screen_slide_anim_duration">800</integer>
     <integer name="screen_transition_anim_duration">300</integer>
 
-    <integer name="screen_slide_anim_duration">800</integer>
+    <integer name="gallery_span_count">3</integer>
+
     <integer name="effect_screen_cover_fade_anim_duration">300</integer>
+
+    <integer name="sticker_screen_picture_fade_anim_duration">300</integer>
+    <integer name="sticker_span_count">5</integer>
 </resources>

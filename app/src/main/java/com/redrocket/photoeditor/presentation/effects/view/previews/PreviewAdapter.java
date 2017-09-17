@@ -59,7 +59,7 @@ public class PreviewAdapter
     @Override
     public PreviewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View preview = inflater.inflate(R.layout.item_effect_preview, null);
+        View preview = inflater.inflate(R.layout.item_effect_preview, parent, false);
 
         return new PreviewHolder(preview);
     }

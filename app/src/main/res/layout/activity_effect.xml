@@ -13,7 +13,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/rv_previews"
+        app:layout_constraintBottom_toTopOf="@+id/rv_effect_previews"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -33,7 +33,7 @@
     </FrameLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_previews"
+        android:id="@+id/rv_effect_previews"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

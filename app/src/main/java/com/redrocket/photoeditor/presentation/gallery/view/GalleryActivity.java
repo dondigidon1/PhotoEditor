@@ -13,7 +13,7 @@ import com.redrocket.photoeditor.presentation.gallery.presenter.GalleryPresenter
 import com.redrocket.photoeditor.presentation.gallery.presenter.GalleryPresenterImpl;
 import com.redrocket.photoeditor.presentation.gallery.structures.PreviewDescriptor;
 import com.redrocket.photoeditor.presentation.gallery.view.grid.GalleryAdapter;
-import com.redrocket.photoeditor.presentation.gallery.view.grid.OffsetItemDecorator;
+import com.redrocket.photoeditor.presentation.common.util.ItemOffsetDecor;
 
 import java.util.List;
 
@@ -51,8 +51,8 @@ public class GalleryActivity extends AppCompatActivity implements GalleryScreenV
 
         final int spanCount = getResources().getInteger(R.integer.gallery_span_count);
         mPreviews.setLayoutManager(new GridLayoutManager(null, spanCount));
-        final int spacing = getResources().getDimensionPixelOffset(R.dimen.gallery_preview_offset);
-        mPreviews.addItemDecoration(new OffsetItemDecorator(spanCount, spacing));
+        final int spacing = getResources().getDimensionPixelOffset(R.dimen.gallery_preview_spacing);
+        mPreviews.addItemDecoration(new ItemOffsetDecor(spanCount, spacing));
 
         mAdapter = new GalleryAdapter(this, this);
         mPreviews.setAdapter(mAdapter);

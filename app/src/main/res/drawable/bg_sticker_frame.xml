@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true">
+        <inset
+            android:drawable="@drawable/shape_sticker_frame"
+            android:insetBottom="@dimen/sticker_frame_rect_padding"
+            android:insetLeft="@dimen/sticker_frame_rect_padding"
+            android:insetRight="@dimen/sticker_frame_rect_padding"
+            android:insetTop="@dimen/sticker_frame_rect_padding"/>
+    </item>
+</selector>

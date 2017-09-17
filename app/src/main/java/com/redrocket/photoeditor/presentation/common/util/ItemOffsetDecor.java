@@ -1,4 +1,4 @@
-package com.redrocket.photoeditor.presentation.gallery.view.grid;
+package com.redrocket.photoeditor.presentation.common.util;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
@@ -7,9 +7,9 @@ import android.view.View;
 /**
  * Реализует отступы между превьюшками в галерее.
  */
-public class OffsetItemDecorator extends RecyclerView.ItemDecoration {
-    private int mSpanCount;
-    private int mSpacing;
+public class ItemOffsetDecor extends RecyclerView.ItemDecoration {
+    private final int mSpanCount;
+    private final int mSpacing;
 
     /**
      * Конструктор.
@@ -17,7 +17,7 @@ public class OffsetItemDecorator extends RecyclerView.ItemDecoration {
      * @param spanCount Количество столбцов.
      * @param spacing   Отступы между столбцами.
      */
-    public OffsetItemDecorator(final int spanCount, final int spacing) {
+    public ItemOffsetDecor(final int spanCount, final int spacing) {
         mSpanCount = spanCount;
         mSpacing = spacing;
     }

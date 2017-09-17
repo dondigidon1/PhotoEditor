@@ -1,11 +1,13 @@
 <resources>
     <string name="app_name" translatable="false">PhotoEditor</string>
 
-    <string name="gallery_title">Pick photo</string>
-    <string name="crop_title">Make crop</string>
-    <string name="effect_title">Choose effect</string>
+    <string name="gallery_title">Pick Photo</string>
+    <string name="crop_title">Crop</string>
+    <string name="effect_title">Choose Effect</string>
+    <string name="sticker_title">Add Emotions</string>
 
     <string name="menu_button_next_text">Next</string>
+    <string name="menu_button_save_text">Save</string>
 
     <string name="effect_original_name_text">Original</string>
     <string name="effect_hue_name_text">Hue</string>

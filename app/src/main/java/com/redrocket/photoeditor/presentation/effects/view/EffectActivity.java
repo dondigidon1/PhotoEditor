@@ -1,8 +1,8 @@
 package com.redrocket.photoeditor.presentation.effects.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
@@ -18,11 +18,14 @@ import com.redrocket.photoeditor.PhotoEditorApplication;
 import com.redrocket.photoeditor.R;
 import com.redrocket.photoeditor.presentation.common.FileErrorDialog;
 import com.redrocket.photoeditor.presentation.common.effect.Effect;
+import com.redrocket.photoeditor.presentation.common.picture.PictureBuilder;
+import com.redrocket.photoeditor.presentation.common.picture.PictureLoader;
 import com.redrocket.photoeditor.presentation.effects.presenter.EffectPresenter;
 import com.redrocket.photoeditor.presentation.effects.presenter.EffectPresenterImpl;
 import com.redrocket.photoeditor.presentation.effects.view.previews.PreviewAdapter;
 import com.redrocket.photoeditor.presentation.effects.view.previews.PreviewDecorator;
 import com.redrocket.photoeditor.presentation.gallery.view.GalleryActivity;
+import com.redrocket.photoeditor.presentation.stickers.view.StickerScreenActivity;
 import com.redrocket.photoeditor.util.BitmapUtils;
 import com.redrocket.photoeditor.util.CropArea;
 
@@ -39,8 +42,8 @@ public class EffectActivity
             AppCompatActivity
         implements
             EffectScreenView,
-            CropTask.OnBitmapReadyListener,
-            FileErrorDialog.OnDialogListener {
+            FileErrorDialog.OnDialogListener,
+            PictureLoader.ResultHandler {
     private static final String TAG = "EffectActivity";
 
     private static final String BUNDLE_IMAGE_PATH = "BUNDLE_IMAGE_PATH";
@@ -69,14 +72,12 @@ public class EffectActivity
         setContentView(R.layout.activity_effect);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         mPictureGpuImage = (GPUImageView) findViewById(R.id.gpu_image_picture);
         mCover = findViewById(R.id.cover);
-        mPreviewRecycler = (RecyclerView) findViewById(R.id.rv_previews);
+        mPreviewRecycler = (RecyclerView) findViewById(R.id.rv_effect_previews);
         int previewSpacing = getResources().getDimensionPixelSize(R.dimen.effect_preview_spacing);
         mPreviewRecycler.addItemDecoration(new PreviewDecorator(previewSpacing));
         ((SimpleItemAnimator) mPreviewRecycler.getItemAnimator()).setSupportsChangeAnimations(false);
-
 
         if (savedInstanceState != null) {
             mImagePath = savedInstanceState.getString(BUNDLE_IMAGE_PATH);
@@ -146,8 +147,8 @@ public class EffectActivity
     }
 
     @Override
-    public void onBitmapReady(Bitmap bitmap) {
-        mPictureGpuImage.setImage(bitmap);
+    public void onPictureReady(Bitmap picture) {
+        mPictureGpuImage.setImage(picture);
         mCover.animate().alpha(0).setDuration(getResources().
                 getInteger(R.integer.effect_screen_cover_fade_anim_duration));
     }
@@ -172,15 +173,19 @@ public class EffectActivity
         mImagePath = path;
         mCropArea = crop;
         try {
-            mPictureGpuImage.setRatio(compRatio(path,crop));
+            mPictureGpuImage.setRatio(compRatio(path, crop));
 
             DisplayMetrics displayMetrics = new DisplayMetrics();
             getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
             int screenWidth = displayMetrics.widthPixels;
             int screenHeight = displayMetrics.heightPixels;
 
-            new CropTask(path, crop, screenWidth, screenHeight, this)
-                    .executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            PictureBuilder builder = PhotoEditorApplication.getPictureFactory().getBuilder()
+                    .image(mImagePath)
+                    .crop(crop)
+                    .minBound(screenWidth, screenHeight);
+            PictureLoader loader = new PictureLoader(builder);
+            loader.load(this);
 
         } catch (IOException e) {
             mPresenter.onFileError();
@@ -231,7 +236,9 @@ public class EffectActivity
 
     @Override
     public void openStickerScreen() {
-
+        Intent intent = StickerScreenActivity.getCallingIntent(this);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_enter, R.anim.slide_out_enter);
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.redrocket.photoeditor.presentation.common;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 
@@ -15,6 +16,7 @@ public class FileErrorDialog extends DialogFragment {
     private OnDialogListener mListener;
 
     @Override
+    @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(R.string.dialog_file_error_msg)

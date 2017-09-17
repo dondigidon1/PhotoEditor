@@ -3,6 +3,7 @@ package com.redrocket.photoeditor.business;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.redrocket.photoeditor.business.structures.Sticker;
 import com.redrocket.photoeditor.util.CropArea;
 
 /**
@@ -14,6 +15,7 @@ public class PictureState {
     private String mSrc;
     private CropArea mCrop = new CropArea();
     private int mEffect = 0;
+    private Sticker[] mStickers;
 
     private transient OnUpdateListener mListener;
 
@@ -29,8 +31,7 @@ public class PictureState {
     /**
      * Конструктор для десереализации.
      */
-    PictureState() {
-    }
+    PictureState() {}
 
     /**
      * Установить слушателя изменений состояния.
@@ -68,6 +69,7 @@ public class PictureState {
      *
      * @return Возвращает прямоугольник в виде {@link CropArea}.
      */
+    @Nullable
     public CropArea getCrop() {
         return mCrop;
     }
@@ -90,6 +92,28 @@ public class PictureState {
      */
     public int getEffect() {
         return mEffect;
+    }
+
+    /**
+     * Установить стикеры.
+     *
+     * @param stickers Коллекция стикеров.
+     */
+    public void setStickers(@NonNull Sticker[] stickers) {
+        mStickers = stickers;
+        if (mListener != null) {
+            mListener.onUpdate();
+        }
+    }
+
+    /**
+     * Получить стикеры.
+     *
+     * @return Возвращает коллекцию стикеров.
+     */
+    @Nullable
+    public Sticker[] getStickers(){
+        return mStickers;
     }
 
     /**
