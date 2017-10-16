@@ -6,4 +6,13 @@
         <attr name="frameColor" format="color"/>
         <attr name="frameWidth" format="dimension"/>
     </declare-styleable>
+
+    <declare-styleable name="CircleLoader">
+        <attr name="ringWidth" format="dimension"/>
+        <attr name="rollerWidth" format="dimension"/>
+        <attr name="ringColor" format="color"/>
+        <attr name="rollerColor" format="color"/>
+        <attr name="rollerSweepAngle" format="float"/>
+        <attr name="animDuration" format="integer"/>
+    </declare-styleable>
 </resources>

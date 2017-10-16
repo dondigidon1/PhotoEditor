@@ -1,9 +1,13 @@
 package com.redrocket.photoeditor.presentation.stickers.presenter;
 
+import android.support.annotation.NonNull;
+
 import com.redrocket.photoeditor.business.Project;
 import com.redrocket.photoeditor.business.structures.Sticker;
 import com.redrocket.photoeditor.presentation.stickers.view.StickerScreenView;
 import com.redrocket.photoeditor.util.CropArea;
+
+import java.util.List;
 
 /**
  * Презентер для экнара стикеров.
@@ -19,7 +23,7 @@ public class StickerScreenPresenterImpl implements StickerScreenPresenter {
     }
 
     @Override
-    public void bindView(StickerScreenView view, boolean isRestore) {
+    public void bindView(@NonNull StickerScreenView view, boolean isRestore) {
         mView = view;
 
         String path = mProject.getPicture().getPath();
@@ -40,8 +44,9 @@ public class StickerScreenPresenterImpl implements StickerScreenPresenter {
     }
 
     @Override
-    public void onConfirmStickers(Sticker[] stickers) {
+    public void onConfirmStickers(List<Sticker> stickers) {
         mProject.getPicture().setStickers(stickers);
+        mView.openSaveScreen();
     }
 
     @Override

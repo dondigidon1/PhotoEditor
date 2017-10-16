@@ -11,7 +11,7 @@ import android.view.MenuItem;
 
 import com.redrocket.photoeditor.PhotoEditorApplication;
 import com.redrocket.photoeditor.R;
-import com.redrocket.photoeditor.presentation.common.FileErrorDialog;
+import com.redrocket.photoeditor.presentation.common.dialogs.FileErrorDialog;
 import com.redrocket.photoeditor.presentation.crop.presenter.CropPresenter;
 import com.redrocket.photoeditor.presentation.crop.presenter.CropPresenterImpl;
 import com.redrocket.photoeditor.presentation.crop.view.custom.CropViewFacade;

@@ -37,7 +37,7 @@ public class CropPresenterImpl implements CropPresenter {
     }
 
     @Override
-    public void bindView(CropScreenView view, boolean isRestore) {
+    public void bindView(@NonNull CropScreenView view, boolean isRestore) {
         mView = view;
 
         if (!isRestore)

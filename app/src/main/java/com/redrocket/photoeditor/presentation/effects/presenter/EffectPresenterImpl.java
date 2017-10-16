@@ -1,5 +1,7 @@
 package com.redrocket.photoeditor.presentation.effects.presenter;
 
+import android.support.annotation.NonNull;
+
 import com.redrocket.photoeditor.business.Project;
 import com.redrocket.photoeditor.presentation.effects.view.EffectScreenView;
 import com.redrocket.photoeditor.util.CropArea;
@@ -21,7 +23,7 @@ public class EffectPresenterImpl implements EffectPresenter {
     }
 
     @Override
-    public void bindView(EffectScreenView view, boolean isRestore) {
+    public void bindView(@NonNull EffectScreenView view, boolean isRestore) {
         mView = view;
 
         String path = mProject.getPicture().getPath();

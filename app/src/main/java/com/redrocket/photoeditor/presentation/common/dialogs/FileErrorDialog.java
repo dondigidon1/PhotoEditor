@@ -1,4 +1,4 @@
-package com.redrocket.photoeditor.presentation.common;
+package com.redrocket.photoeditor.presentation.common.dialogs;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -28,8 +28,9 @@ public class FileErrorDialog extends DialogFragment {
     @Override
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
-        if (mListener != null)
+        if (mListener != null) {
             mListener.onDismiss();
+        }
     }
 
     /**

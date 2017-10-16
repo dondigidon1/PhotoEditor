@@ -2,7 +2,7 @@ package com.redrocket.photoeditor.presentation.stickers.view.stickerview;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
-import android.graphics.Point;
+import android.graphics.PointF;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.v4.util.Pair;
@@ -49,8 +49,8 @@ class StickerView extends FrameLayout implements View.OnTouchListener, View.OnCl
     private int mMinStickerHeight;
     private float mStickerRatio;
 
-    private final Point mCenterOnScreen = new Point();
-    private final Point mCenterOnParent = new Point();
+    private final PointF mCenterOnScreen = new PointF();
+    private final PointF mCenterOnParent = new PointF();
 
     private final StretchHandler mStretchHandler = new StretchHandler();
     private final MoveHandler mMoveHandler = new MoveHandler();
@@ -97,12 +97,12 @@ class StickerView extends FrameLayout implements View.OnTouchListener, View.OnCl
                 params.height = stickerHeight;
                 mStickerImage.setLayoutParams(params);
 
-                int centerX = (int) (sticker.center.first * parent.getWidth());
-                int centerY = (int) (sticker.center.second * parent.getHeight());
+                float centerX = sticker.center.first * parent.getWidth();
+                float centerY = sticker.center.second * parent.getHeight();
 
                 measure(SELF_MEASURE_SPEC, SELF_MEASURE_SPEC);
-                int cornerX = centerX - getMeasuredWidth() / 2;
-                int cornerY = centerY - getMeasuredHeight() / 2;
+                float cornerX = centerX - getMeasuredWidth() / 2f;
+                float cornerY = centerY - getMeasuredHeight() / 2f;
 
                 moveTo(cornerX, cornerY);
 
@@ -207,8 +207,8 @@ class StickerView extends FrameLayout implements View.OnTouchListener, View.OnCl
 
     StickerState getStickerState() {
         View parent = ((View) getParent());
-        float centerX = (float) mCenterOnParent.x / (float) parent.getWidth();
-        float centerY = (float) mCenterOnParent.y / (float) parent.getHeight();
+        float centerX = mCenterOnParent.x / parent.getWidth();
+        float centerY = mCenterOnParent.y / parent.getHeight();
 
         ViewGroup.LayoutParams params = mStickerImage.getLayoutParams();
         float width = (float) params.width / (float) parent.getWidth();
@@ -254,8 +254,8 @@ class StickerView extends FrameLayout implements View.OnTouchListener, View.OnCl
     }
 
     private void refreshCenterOnParent() {
-        int centerX = (int) (getX() + getMeasuredWidth() / 2);
-        int centerY = (int) (getY() + getMeasuredHeight() / 2);
+        float centerX = getX() + getMeasuredWidth() / 2f;
+        float centerY = getY() + getMeasuredHeight() / 2f;
 
         mCenterOnParent.set(centerX, centerY);
     }
@@ -263,8 +263,8 @@ class StickerView extends FrameLayout implements View.OnTouchListener, View.OnCl
     private void refreshCenterOnScreen() {
         ((ViewGroup) getParent()).getLocationOnScreen(TMP_LOCATION);
 
-        int centerX = (int) (TMP_LOCATION[0] + getX() + getMeasuredWidth() / 2);
-        int centerY = (int) (TMP_LOCATION[1] + getY() + getMeasuredHeight() / 2);
+        float centerX = TMP_LOCATION[0] + getX() + getMeasuredWidth() / 2f;
+        float centerY = TMP_LOCATION[1] + getY() + getMeasuredHeight() / 2f;
 
         mCenterOnScreen.set(centerX,centerY);
     }
@@ -289,8 +289,8 @@ class StickerView extends FrameLayout implements View.OnTouchListener, View.OnCl
 
         measure(SELF_MEASURE_SPEC, SELF_MEASURE_SPEC);
 
-        int cornerX = mCenterOnParent.x - getMeasuredWidth() / 2;
-        int cornerY = mCenterOnParent.y - getMeasuredHeight() / 2;
+        float cornerX = mCenterOnParent.x - getMeasuredWidth() / 2f;
+        float cornerY = mCenterOnParent.y - getMeasuredHeight() / 2f;
 
         setX(cornerX);
         setY(cornerY);
