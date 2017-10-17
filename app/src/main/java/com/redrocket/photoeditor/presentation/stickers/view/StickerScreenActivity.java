@@ -33,7 +33,6 @@ import com.redrocket.photoeditor.presentation.stickers.view.stickerview.StickerB
 import com.redrocket.photoeditor.presentation.stickers.view.stickerview.StickerState;
 import com.redrocket.photoeditor.util.CropArea;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -246,20 +245,6 @@ public class StickerScreenActivity
             Pair<Float, Float> center = stickerState.center;
             float rotation = stickerState.rotation;
             stickers.add(new Sticker(id, center, dims, rotation));
-        }
-
-        try {
-            Bitmap bitmap = PhotoEditorApplication.getPictureFactory().getBuilder()
-                    .image(mImagePath)
-                    .crop(mCropArea)
-                    .effect(mAppliedEffectId)
-                    .stickers(stickers)
-                    .getBitmap();
-
-            mPictureImage.setImageBitmap(bitmap);
-            mStickerBoard.clearStickers();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
 
         mPresenter.onConfirmStickers(stickers);
