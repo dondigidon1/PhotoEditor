@@ -3,9 +3,19 @@
     <string name="crop_title">Оставь только нужное</string>
     <string name="effect_title">Выбери эффект</string>
     <string name="sticker_title">Добавь эмоций</string>
+    <string name="save_saving_title">Сохранение</string>
+    <string name="save_result_title">Готово</string>
 
     <string name="menu_button_next_text">Далее</string>
     <string name="menu_button_save_text">Сохранить</string>
 
     <string name="dialog_file_error_msg">Отсутствует файл.\nВернуться в галерею.</string>
+
+    <string name="dialog_close_saving_msg">Сохранение будет остановлено.</string>
+    <string name="save_share">Поделиться через:</string>
+
+    <string name="save_saving_msg">Изображение сохраняется.</string>
+    <string name="save_result_msg">Изображение сохранено в вашей галерее.</string>
+    <string name="save_screen_button_share">Поделиться</string>
+    <string name="save_screen_button_finish">Finish</string>
 </resources>

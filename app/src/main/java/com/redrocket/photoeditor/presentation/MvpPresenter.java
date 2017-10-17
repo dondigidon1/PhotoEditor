@@ -1,5 +1,7 @@
 package com.redrocket.photoeditor.presentation;
 
+import android.support.annotation.NonNull;
+
 /**
  * Базовый интерфейс презентера из паттерна MVP.
  *
@@ -14,7 +16,7 @@ public interface MvpPresenter<V extends MvpView> {
      * @param isRestore Экран после воосстановления
      *                  true - восстановление false - первое создание.
      */
-    void bindView(V view, boolean isRestore);
+    void bindView(@NonNull V view, boolean isRestore);
 
     /**
      * Уничтожить презентер.

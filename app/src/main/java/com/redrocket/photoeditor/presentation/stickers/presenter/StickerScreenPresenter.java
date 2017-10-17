@@ -4,6 +4,8 @@ import com.redrocket.photoeditor.business.structures.Sticker;
 import com.redrocket.photoeditor.presentation.MvpPresenter;
 import com.redrocket.photoeditor.presentation.stickers.view.StickerScreenView;
 
+import java.util.List;
+
 /**
  * Интерфейс презентера для экрана стикеров.
  */
@@ -20,7 +22,7 @@ public interface StickerScreenPresenter extends MvpPresenter<StickerScreenView> 
      *
      * @param stickers Коллекция выбранных стикеров.
      */
-    void onConfirmStickers(Sticker[] stickers);
+    void onConfirmStickers(List<Sticker> stickers);
 
     /**
      * Произошла ошибка при обращении к файлу в постоянной памяти.

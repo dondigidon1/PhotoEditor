@@ -32,4 +32,9 @@ public interface StickerScreenView extends MvpView {
      * Показать сообщение с файловой ошибкой.
      */
     void showFileErrorMsg();
+
+    /**
+     * Открыть экран сохранения.
+     */
+    void openSaveScreen();
 }

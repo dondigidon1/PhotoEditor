@@ -45,6 +45,7 @@ public class PictureLoader {
         void onError();
     }
 
+    // TODO через Runnable сделать
     private class LoadTask extends Thread {
         private final Handler mHandler = new Handler();
         private final WeakReference<ResultHandler> mListenerRef;

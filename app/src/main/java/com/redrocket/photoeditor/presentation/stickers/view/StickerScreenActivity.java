@@ -18,13 +18,14 @@ import android.widget.ImageView;
 import com.redrocket.photoeditor.PhotoEditorApplication;
 import com.redrocket.photoeditor.R;
 import com.redrocket.photoeditor.business.structures.Sticker;
-import com.redrocket.photoeditor.presentation.common.FileErrorDialog;
+import com.redrocket.photoeditor.presentation.common.dialogs.FileErrorDialog;
 import com.redrocket.photoeditor.presentation.common.picture.PictureBuilder;
 import com.redrocket.photoeditor.presentation.common.picture.PictureLoader;
 import com.redrocket.photoeditor.presentation.common.sticker.StickerInfo;
 import com.redrocket.photoeditor.presentation.common.sticker.StickersTable;
 import com.redrocket.photoeditor.presentation.common.util.ItemOffsetDecor;
 import com.redrocket.photoeditor.presentation.gallery.view.GalleryActivity;
+import com.redrocket.photoeditor.presentation.save.view.SaveActivity;
 import com.redrocket.photoeditor.presentation.stickers.presenter.StickerScreenPresenter;
 import com.redrocket.photoeditor.presentation.stickers.presenter.StickerScreenPresenterImpl;
 import com.redrocket.photoeditor.presentation.stickers.view.pane.StickersAdapter;
@@ -32,6 +33,7 @@ import com.redrocket.photoeditor.presentation.stickers.view.stickerview.StickerB
 import com.redrocket.photoeditor.presentation.stickers.view.stickerview.StickerState;
 import com.redrocket.photoeditor.util.CropArea;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +45,7 @@ public class StickerScreenActivity
             StickersAdapter.OnStickerClickListener,
             PictureLoader.ResultHandler,
             FileErrorDialog.OnDialogListener {
+
     private static final String TAG = "StickerScreenActivity";
 
     private static final String BUNDLE_IMAGE_PATH = "BUNDLE_IMAGE_PATH";
@@ -122,7 +125,7 @@ public class StickerScreenActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_next:
+            case R.id.action_save:
                 handleSaveClick();
                 return true;
             case android.R.id.home:
@@ -186,7 +189,8 @@ public class StickerScreenActivity
         mCropArea = crop;
         mAppliedEffectId = effect;
 
-        PictureBuilder builder = new PictureBuilder(this)
+        PictureBuilder builder = PhotoEditorApplication.getPictureFactory()
+                .getBuilder()
                 .image(path)
                 .crop(crop)
                 .effect(effect);
@@ -209,6 +213,13 @@ public class StickerScreenActivity
     }
 
     @Override
+    public void openSaveScreen() {
+        Intent intent = SaveActivity.getCallingIntent(this);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_enter, R.anim.slide_out_enter);
+    }
+
+    @Override
     public void resetToGalleryScreen() {
         startActivity(GalleryActivity.getCallingIntent(this));
     }
@@ -227,15 +238,28 @@ public class StickerScreenActivity
 
     private void handleSaveClick() {
         StickerState[] stickerStates = mStickerBoard.getStickers();
-        Sticker[] stickers = new Sticker[stickerStates.length];
+        List<Sticker> stickers = new ArrayList<>(stickerStates.length);
 
-        for (int i = 0; i < stickerStates.length; i++) {
-            StickerState stickerState = stickerStates[i];
+        for (StickerState stickerState : stickerStates) {
             int id = stickerState.id;
             Pair<Float, Float> dims = stickerState.dims;
             Pair<Float, Float> center = stickerState.center;
             float rotation = stickerState.rotation;
-            stickers[i] = new Sticker(id, center, dims, rotation);
+            stickers.add(new Sticker(id, center, dims, rotation));
+        }
+
+        try {
+            Bitmap bitmap = PhotoEditorApplication.getPictureFactory().getBuilder()
+                    .image(mImagePath)
+                    .crop(mCropArea)
+                    .effect(mAppliedEffectId)
+                    .stickers(stickers)
+                    .getBitmap();
+
+            mPictureImage.setImageBitmap(bitmap);
+            mStickerBoard.clearStickers();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         mPresenter.onConfirmStickers(stickers);

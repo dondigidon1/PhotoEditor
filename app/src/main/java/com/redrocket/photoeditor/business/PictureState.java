@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import com.redrocket.photoeditor.business.structures.Sticker;
 import com.redrocket.photoeditor.util.CropArea;
 
+import java.util.List;
+
 /**
  * Класс представляет собой описание изображения.
  */
@@ -15,7 +17,9 @@ public class PictureState {
     private String mSrc;
     private CropArea mCrop = new CropArea();
     private int mEffect = 0;
-    private Sticker[] mStickers;
+    private List<Sticker> mStickers;
+
+    private String mSavedPath = null;
 
     private transient OnUpdateListener mListener;
 
@@ -99,7 +103,7 @@ public class PictureState {
      *
      * @param stickers Коллекция стикеров.
      */
-    public void setStickers(@NonNull Sticker[] stickers) {
+    public void setStickers(@NonNull List<Sticker> stickers) {
         mStickers = stickers;
         if (mListener != null) {
             mListener.onUpdate();
@@ -112,8 +116,28 @@ public class PictureState {
      * @return Возвращает коллекцию стикеров.
      */
     @Nullable
-    public Sticker[] getStickers(){
+    public List<Sticker> getStickers(){
         return mStickers;
+    }
+
+    /**
+     * Установить путь к файлу где сохранено изображение.
+     */
+    public void setSavedPath(@NonNull String path) {
+        mSavedPath = path;
+        if (mListener != null) {
+            mListener.onUpdate();
+        }
+    }
+
+    /**
+     * Получить путь к файлу с сохраненным изображением.
+     *
+     * @return Возвращает путь к файлу.
+     */
+    @Nullable
+    public String getSavedPath() {
+        return mSavedPath;
     }
 
     /**

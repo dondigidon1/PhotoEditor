@@ -16,7 +16,7 @@ import android.view.View;
 
 import com.redrocket.photoeditor.PhotoEditorApplication;
 import com.redrocket.photoeditor.R;
-import com.redrocket.photoeditor.presentation.common.FileErrorDialog;
+import com.redrocket.photoeditor.presentation.common.dialogs.FileErrorDialog;
 import com.redrocket.photoeditor.presentation.common.effect.Effect;
 import com.redrocket.photoeditor.presentation.common.picture.PictureBuilder;
 import com.redrocket.photoeditor.presentation.common.picture.PictureLoader;
@@ -219,7 +219,6 @@ public class EffectActivity
                 mCropArea,
                 getResources().getDimensionPixelSize(R.dimen.effect_preview_side),
                 effects,
-
                 new PreviewAdapter.OnEffectSelectListener() {
                     @Override
                     public void onEffectSelect(int index) {

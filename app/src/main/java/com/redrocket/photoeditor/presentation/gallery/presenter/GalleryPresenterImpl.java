@@ -3,6 +3,7 @@ package com.redrocket.photoeditor.presentation.gallery.presenter;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 
 import com.redrocket.photoeditor.presentation.gallery.structures.PreviewDescriptor;
 import com.redrocket.photoeditor.presentation.gallery.view.GalleryScreenView;
@@ -24,7 +25,7 @@ public class GalleryPresenterImpl implements GalleryPresenter {
     private Context mContext;
 
     @Override
-    public void bindView(GalleryScreenView view, boolean isRestore) {
+    public void bindView(@NonNull GalleryScreenView view, boolean isRestore) {
         mView = view;
         mContext = view.getContext();
 
