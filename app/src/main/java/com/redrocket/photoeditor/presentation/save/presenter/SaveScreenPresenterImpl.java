@@ -94,9 +94,8 @@ public class SaveScreenPresenterImpl
     public void onStopSavingClick() {
         if (mSaver.isSaving()) {
             mSaver.stopSaving();
-        } else {
-            mManager.remove(mProject.getPicture().getSavedPath());
         }
+
         mView.closeScreen();
     }
 
