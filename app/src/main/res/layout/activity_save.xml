@@ -5,37 +5,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fafa88"
-    tools:context="com.redrocket.photoeditor.presentation.save.view.SaveActivity"
-    >
+    android:background="@color/colorPrimaryLight"
+    tools:context="com.redrocket.photoeditor.presentation.save.view.SaveActivity">
 
     <ImageView
         android:id="@+id/image_preview"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="16dp"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/guideline_preview"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:alpha="0"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:alpha="0"/>
 
     <com.redrocket.photoeditor.presentation.save.view.CircleLoader
         android:id="@+id/loader"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        app:layout_constraintTop_toTopOf="@+id/image_preview"
         app:layout_constraintBottom_toBottomOf="@+id/image_preview"
         app:layout_constraintLeft_toLeftOf="@+id/image_preview"
         app:layout_constraintRight_toRightOf="@+id/image_preview"
+        app:layout_constraintTop_toTopOf="@+id/image_preview"
         app:animDuration="@integer/save_screen_loader_cycle_anim_duration"
-        app:ringColor="@color/colorAccent"
+        app:ringColor="@color/colorDeviderA150"
         app:ringWidth="14dp"
-        app:rollerColor="#00FF00"
+        app:rollerColor="@color/colorAccent"
         app:rollerSweepAngle="180"
-        app:rollerWidth="10dp"
-        />
+        app:rollerWidth="10dp"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline_preview"
@@ -46,47 +43,71 @@
 
     <TextView
         android:id="@+id/text_saving"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/SaveText"
         android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/guideline_preview"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="@string/save_saving_msg" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideline_preview"
+        android:text="@string/save_saving_msg"/>
 
     <TextView
         android:id="@+id/text_result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/SaveText"
         android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guideline_preview"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="@string/save_result_msg"
         android:visibility="invisible"
-        tools:visibility="visible" />
+        tools:visibility="visible"/>
 
-    <Button
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/button_share"
-        style="@style/SaveResultButton"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/text_result"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="@dimen/save_result_button_width"
+        android:layout_height="@dimen/save_result_button_height"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_result"
         android:background="@drawable/btn_share"
-        android:text="@string/save_screen_button_share"
+        android:clickable="true"
         android:visibility="invisible"
-        tools:visibility="visible" />
+        tools:visibility="visible">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginRight="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/text_share"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic_share_white"/>
+
+        <TextView
+            android:id="@+id/text_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@string/save_screen_button_share"
+            android:textAllCaps="true"
+            android:textColor="@color/colorTextIcons"
+            android:textSize="16sp"/>
+    </android.support.constraint.ConstraintLayout>
 
     <Button
         android:id="@+id/button_finish"
-        style="@style/SaveResultButton"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/button_share"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="@dimen/save_result_button_width"
+        android:layout_height="@dimen/save_result_button_height"
+        android:layout_marginTop="14dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_share"
         android:background="@drawable/btn_finish"
         android:text="@string/save_screen_button_finish"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="16sp"
         android:visibility="invisible"
-        tools:visibility="visible" />
+        tools:visibility="visible"/>
 </android.support.constraint.ConstraintLayout>

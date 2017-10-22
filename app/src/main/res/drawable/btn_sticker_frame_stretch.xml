@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@color/colorAccent"/>
+        </shape>
+    </item>
+    <item
+        android:drawable="@drawable/ic_stretch_white"
+        android:top="@dimen/sticker_frame_btn_ic_padding"
+        android:bottom="@dimen/sticker_frame_btn_ic_padding"
+        android:left="@dimen/sticker_frame_btn_ic_padding"
+        android:right="@dimen/sticker_frame_btn_ic_padding"
+        />
+</layer-list>

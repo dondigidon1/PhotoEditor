@@ -31,7 +31,7 @@ public class StickersAdapter extends RecyclerView.Adapter<StickersAdapter.Sticke
     @Override
     public StickerHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_sticker, parent, false);
+                .inflate(R.layout.item_sticker_preview, parent, false);
         return new StickerHolder(view);
     }
 

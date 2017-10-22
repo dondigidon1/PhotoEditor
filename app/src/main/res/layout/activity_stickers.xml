@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffff95"
+    android:background="@color/colorPrimaryLight"
     tools:context="com.redrocket.photoeditor.presentation.stickers.view.StickerScreenActivity">
 
     <ImageView
@@ -16,9 +16,9 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="@dimen/activity_margin"
         android:adjustViewBounds="true"
         android:alpha="0"
-        android:background="#5500FF00"
         app:srcCompat="@drawable/emoji_rocket"
         tools:alpha="1f"/>
 
@@ -33,13 +33,12 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_sticker_previews"
-        android:layout_width="368dp"
+        android:layout_width="0dp"
         android:layout_height="200dp"
-        android:layout_marginBottom="6dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+        android:paddingLeft="@dimen/sticker_grid_padding_horizontal"
+        android:paddingRight="@dimen/sticker_grid_padding_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:background="#55FF0000"/>
+        android:background="@color/colorPrimary" />
 </android.support.constraint.ConstraintLayout>

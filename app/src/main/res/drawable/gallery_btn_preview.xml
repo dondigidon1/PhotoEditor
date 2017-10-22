@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@color/cadetBlueA80" android:state_pressed="true" />
+    <item android:drawable="@color/colorDeviderA150" android:state_pressed="true" />
 </selector>

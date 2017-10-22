@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8181ca"
+    android:background="@color/colorPrimaryLight"
+    android:padding="@dimen/activity_margin"
     tools:context=".presentation.crop.view.CropActivity">
 
     <com.theartofdev.edmodo.cropper.CropImageView
@@ -19,6 +21,7 @@
         app:cropGuidelines="off"
         app:cropBorderCornerThumbRadius="@dimen/crop_thumb_radius"
         app:cropMinCropWindowHeight="@dimen/crop_area_min_side"
-        app:cropMinCropWindowWidth="@dimen/crop_area_min_side"/>
+        app:cropMinCropWindowWidth="@dimen/crop_area_min_side"
+        app:cropBorderLineColor="@color/colorAccent" />
 
 </android.support.constraint.ConstraintLayout>

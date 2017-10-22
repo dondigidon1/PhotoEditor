@@ -1,6 +1,6 @@
 <resources>
     <string name="gallery_title">Выбери фотографию</string>
-    <string name="crop_title">Оставь только нужное</string>
+    <string name="crop_title">Удали ненужное</string>
     <string name="effect_title">Выбери эффект</string>
     <string name="sticker_title">Добавь эмоций</string>
     <string name="save_saving_title">Сохранение</string>
@@ -14,8 +14,8 @@
     <string name="dialog_close_saving_msg">Сохранение будет остановлено.</string>
     <string name="save_share">Поделиться через:</string>
 
-    <string name="save_saving_msg">Изображение сохраняется.</string>
+    <string name="save_saving_msg">Изображение сохраняется в вашу галерею...</string>
     <string name="save_result_msg">Изображение сохранено в вашей галерее.</string>
     <string name="save_screen_button_share">Поделиться</string>
-    <string name="save_screen_button_finish">Finish</string>
+    <string name="save_screen_button_finish">Завершить</string>
 </resources>
