@@ -8,12 +8,18 @@
     </style>
 
     <style name="StickerFrameButton">
-        <item name="android:layout_width">30dp</item>
-        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:padding">12dp</item>
     </style>
 
-    <style name="SaveResultButton">
-        <item name="android:layout_width">100dp</item>
-        <item name="android:layout_height">30dp</item>
+    <style name="SaveText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxWidth">250dp</item>
+        <item name="android:text">@string/save_result_msg</item>
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:gravity">center</item>
     </style>
 </resources>

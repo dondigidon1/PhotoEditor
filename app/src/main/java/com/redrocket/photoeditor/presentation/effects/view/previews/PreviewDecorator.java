@@ -23,8 +23,10 @@ public class PreviewDecorator extends RecyclerView.ItemDecoration {
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         outRect.right = mSpacing;
-
         if (parent.getChildAdapterPosition(view) == 0)
             outRect.left = mSpacing;
+
+        outRect.top = mSpacing;
+        outRect.bottom = mSpacing;
     }
 }

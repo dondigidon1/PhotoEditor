@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -57,8 +56,8 @@ public class SaveActivity
     private View mLoader;
     private TextView mSavingText;
     private TextView mResultText;
-    private Button mShareButton;
-    private Button mFinishButton;
+    private View mShareButton;
+    private View mFinishButton;
 
     private String mImagePath;
     private CropArea mCropArea;
@@ -89,8 +88,8 @@ public class SaveActivity
         mLoader = findViewById(R.id.loader);
         mSavingText = (TextView) findViewById(R.id.text_saving);
         mResultText = (TextView) findViewById(R.id.text_result);
-        mShareButton = (Button) findViewById(R.id.button_share);
-        mFinishButton = (Button) findViewById(R.id.button_finish);
+        mShareButton =  findViewById(R.id.button_share);
+        mFinishButton = findViewById(R.id.button_finish);
 
         mShareButton.setOnClickListener(new View.OnClickListener() {
             @Override

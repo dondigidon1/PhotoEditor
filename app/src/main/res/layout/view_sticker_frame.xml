@@ -7,29 +7,33 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_sticker_frame"
-    android:padding="0dp">
+    android:padding="0dp"
+    >
 
     <ImageView
         android:id="@+id/image_sticker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="25dp" />
+        android:layout_margin="32dp"
+        app:srcCompat="@mipmap/ic_launcher"
+        />
 
     <ImageView
         android:id="@+id/button_cross"
         style="@style/StickerFrameButton"
         android:layout_gravity="top|start"
         android:visibility="invisible"
-        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel"
-        tool:visibility="visible"/>
+        app:srcCompat="@drawable/btn_sticker_frame_cross"
+        tool:visibility="visible"
+        />
 
     <ImageView
         android:id="@+id/button_stretch"
         style="@style/StickerFrameButton"
         android:layout_gravity="bottom|end"
-        android:background="#5500FF00"
         android:visibility="invisible"
-        app:srcCompat="@android:drawable/btn_star_big_on"
-        tool:visibility="visible"/>
+        app:srcCompat="@drawable/btn_sticker_frame_stretch"
+        tool:visibility="visible"
+        />
 </FrameLayout>

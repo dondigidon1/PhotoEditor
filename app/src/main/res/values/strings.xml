@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name" translatable="false">Rocket Photo</string>
 
-    <string name="gallery_title">Pick Photo</string>
+    <string name="gallery_title">Choose photo</string>
     <string name="crop_title">Crop</string>
-    <string name="effect_title">Choose Effect</string>
-    <string name="sticker_title">Add Emotions</string>
+    <string name="effect_title">Choose effect</string>
+    <string name="sticker_title">Add emotions</string>
     <string name="save_saving_title">Saving</string>
     <string name="save_result_title">Ready</string>
 
@@ -21,8 +21,8 @@
 
     <string name="dialog_close_saving_msg">Saving will have been stopped.</string>
     <string name="save_share">Share with:</string>
-    <string name="save_saving_msg">The picture is being saved.</string>
-    <string name="save_result_msg">The picture has been saved in your gallery.</string>
+    <string name="save_saving_msg">Saving picture to gallery...</string>
+    <string name="save_result_msg">Picture saved to gallery.</string>
     <string name="save_screen_button_share">Share</string>
     <string name="save_screen_button_finish">Finish</string>
 </resources>

@@ -49,7 +49,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.PreviewH
     @Override
     public PreviewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         final View itemView = LayoutInflater.from(mContext).
-                inflate(R.layout.gallery_item_preview, parent, false);
+                inflate(R.layout.item_gallery_preview, parent, false);
 
         return new PreviewHolder(itemView);
     }
@@ -57,7 +57,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.PreviewH
     @Override
     public void onBindViewHolder(PreviewHolder holder, int pos) {
         createRequest(pos)
-                .placeholder(R.color.steelGray)
+                .placeholder(R.color.colorDevider)
                 .priority(Priority.HIGH)
                 .into(holder.preview);
     }
