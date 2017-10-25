@@ -12,10 +12,20 @@
     <string name="menu_button_save_text">Save</string>
 
     <string name="effect_original_name_text">Original</string>
-    <string name="effect_hue_name_text">Hue</string>
-    <string name="effect_grayscale_name_text">Grayscale</string>
-    <string name="effect_color_invert_name_text">ColorInvert</string>
-    <string name="effect_sepia_name_text">Sepia</string>
+    <string name="effect_hammer_name_text">Hammer</string>
+    <string name="effect_logan_name_text">Logan</string>
+    <string name="effect_sunrise_name_text">Sunrise</string>
+    <string name="effect_rock_name_text">Rock</string>
+    <string name="effect_midnight_name_text">Midnight</string>
+    <string name="effect_indigo_name_text">Indigo</string>
+    <string name="effect_amber_name_text">Amber</string>
+    <string name="effect_gold_name_text">Gold</string>
+    <string name="effect_spirit_name_text">Spirit</string>
+    <string name="effect_jamal_name_text">Jamal</string>
+    <string name="effect_sky_invert_name_text">Sky</string>
+    <string name="effect_art_name_text">Art</string>
+    <string name="effect_glory_name_text">Glory</string>
+    <string name="effect_blues_name_text">Blues</string>
 
     <string name="dialog_file_error_msg">There\'s no file.\nReturn to gallery.</string>
 

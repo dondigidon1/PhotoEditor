@@ -19,7 +19,6 @@
         android:layout_margin="@dimen/activity_margin"
         android:adjustViewBounds="true"
         android:alpha="0"
-        app:srcCompat="@drawable/emoji_rocket"
         tools:alpha="1f"/>
 
     <com.redrocket.photoeditor.presentation.stickers.view.stickerview.StickerBoard
@@ -29,7 +28,9 @@
         app:layout_constraintBottom_toBottomOf="@id/image_picture"
         app:layout_constraintLeft_toLeftOf="@id/image_picture"
         app:layout_constraintRight_toRightOf="@id/image_picture"
-        app:layout_constraintTop_toTopOf="@id/image_picture"/>
+        app:layout_constraintTop_toTopOf="@id/image_picture"
+        android:alpha="0"
+        />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_sticker_previews"
