@@ -18,4 +18,20 @@
     <string name="save_result_msg">Изображение сохранено в вашей галерее.</string>
     <string name="save_screen_button_share">Поделиться</string>
     <string name="save_screen_button_finish">Завершить</string>
+
+    <string name="effect_original_name_text">Оригинал</string>
+    <string name="effect_hammer_name_text">Хаммер</string>
+    <string name="effect_logan_name_text">Логан</string>
+    <string name="effect_sunrise_name_text">Санрайз</string>
+    <string name="effect_rock_name_text">Рок</string>
+    <string name="effect_midnight_name_text">Миднайт</string>
+    <string name="effect_indigo_name_text">Индиго</string>
+    <string name="effect_amber_name_text">Амбер</string>
+    <string name="effect_gold_name_text">Голд</string>
+    <string name="effect_spirit_name_text">Спирит</string>
+    <string name="effect_jamal_name_text">Джамал</string>
+    <string name="effect_sky_invert_name_text">Скай</string>
+    <string name="effect_art_name_text">Арт</string>
+    <string name="effect_glory_name_text">Глори</string>
+    <string name="effect_blues_name_text">Блюз</string>
 </resources>

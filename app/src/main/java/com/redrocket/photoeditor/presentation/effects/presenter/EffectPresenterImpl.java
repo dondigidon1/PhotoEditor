@@ -12,7 +12,7 @@ import com.redrocket.photoeditor.util.CropArea;
 public class EffectPresenterImpl implements EffectPresenter {
     private static final String TAG = "EffectPresenterImpl";
 
-    private static final int[] EFFECTS = new int[]{0, 1, 2, 3, 4};
+    private static final int[] EFFECTS = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
 
     private final Project mProject;
 
