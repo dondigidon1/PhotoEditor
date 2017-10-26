@@ -32,6 +32,10 @@
         <activity
             android:name=".presentation.save.view.SaveActivity"
             android:label="@string/save_saving_title"/>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="bb0146c9b67a494460152b05f2e45805800a34cb" />
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
