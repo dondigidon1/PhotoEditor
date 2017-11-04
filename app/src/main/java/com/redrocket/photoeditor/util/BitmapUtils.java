@@ -1,13 +1,20 @@
 package com.redrocket.photoeditor.util;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.RectF;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.IntRange;
+import android.support.annotation.NonNull;
 import android.support.media.ExifInterface;
 import android.support.v4.util.Pair;
+import android.support.v8.renderscript.Allocation;
+import android.support.v8.renderscript.Element;
+import android.support.v8.renderscript.RenderScript;
+import android.support.v8.renderscript.ScriptIntrinsicBlur;
 
 import java.io.IOException;
 
@@ -132,5 +139,37 @@ public class BitmapUtils {
             default:
                 return 0;
         }
+    }
+
+    /**
+     * Получить изображение с применением блюра.
+     *
+     * @param context Контекст.
+     * @param src     Исходное изображение.
+     *                Будет освобождено через {@link Bitmap#recycle()}.
+     * @param radius  радиус блюра.
+     * @return Новое изображение с блюром.
+     */
+    public static Bitmap getBlurred(@NonNull Context context,
+                                    @NonNull Bitmap src,
+                                    @IntRange(from = 0) int radius) {
+
+        RenderScript rs = RenderScript.create(context);
+        ScriptIntrinsicBlur intrinsic = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
+
+        Allocation tmpIn = Allocation.createFromBitmap(rs, src);
+
+        Bitmap output = Bitmap.createBitmap(src.getWidth(), src.getHeight(), Bitmap.Config.ARGB_8888);
+        Allocation tmpOut = Allocation.createFromBitmap(rs, output);
+
+        intrinsic.setRadius(radius);
+        intrinsic.setInput(tmpIn);
+        intrinsic.forEach(tmpOut);
+
+        tmpOut.copyTo(output);
+
+        src.recycle();
+
+        return output;
     }
 }

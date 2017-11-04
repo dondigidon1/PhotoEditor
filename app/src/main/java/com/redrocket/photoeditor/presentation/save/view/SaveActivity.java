@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
@@ -37,7 +38,6 @@ public class SaveActivity
         AppCompatActivity
     implements
         SaveScreenView,
-        PictureLoader.ResultHandler,
         FileErrorDialog.OnDialogListener,
         CloseSavingDialog.OnDialogListener {
 
@@ -52,7 +52,10 @@ public class SaveActivity
     private static final String TAG_FILE_ERROR_DIALOG = "TAG_FILE_ERROR_DIALOG";
     private static final String TAG_CLOSE_SAVING_DIALOG = "TAG_CLOSE_SAVING_DIALOG";
 
+    private static final int PREVIEW_BLUR_RADIUS = 16;
+
     private ImageView mPreviewImage;
+    private ImageView mBackgroundImage;
     private View mLoader;
     private TextView mSavingText;
     private TextView mResultText;
@@ -66,6 +69,30 @@ public class SaveActivity
     private boolean mIsShowResult = false;
 
     private SaveScreenPresenter mPresenter;
+
+    private final PictureLoader.ResultHandler previewResultHandler = new PictureLoader.ResultHandler() {
+        @Override
+        public void onPictureReady(Bitmap picture) {
+            handleBackgroundReady(picture);
+        }
+
+        @Override
+        public void onError() {
+            handlePictureError();
+        }
+    };
+
+    private final PictureLoader.ResultHandler backgroundResultHandler = new PictureLoader.ResultHandler() {
+        @Override
+        public void onPictureReady(Bitmap picture) {
+            handlePreviewReady(picture);
+        }
+
+        @Override
+        public void onError() {
+            handlePictureError();
+        }
+    };
 
     /**
      * Создать вызывающий интент.
@@ -85,6 +112,7 @@ public class SaveActivity
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mPreviewImage = (ImageView) findViewById(R.id.image_preview);
+        mBackgroundImage = (ImageView) findViewById(R.id.image_background);
         mLoader = findViewById(R.id.loader);
         mSavingText = (TextView) findViewById(R.id.text_saving);
         mResultText = (TextView) findViewById(R.id.text_result);
@@ -194,18 +222,6 @@ public class SaveActivity
     }
 
     @Override
-    public void onPictureReady(Bitmap picture) {
-        mPreviewImage.setImageBitmap(picture);
-        mPreviewImage.animate().alpha(1).setDuration(getResources().
-                getInteger(R.integer.save_screen_picture_fade_anim_duration));
-    }
-
-    @Override
-    public void onError() {
-        mPresenter.onFileError();
-    }
-
-    @Override
     public void onDismiss() {
         mPresenter.onCloseFileErrorMsg();
     }
@@ -262,15 +278,47 @@ public class SaveActivity
         mAppliedEffectId = effect;
         mStickers = (ArrayList<Sticker>) stickers;
 
-        PictureBuilder builder = PhotoEditorApplication.getPictureFactory()
+        DisplayMetrics display = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(display);
+
+        PictureBuilder previewBuilder = PhotoEditorApplication.getPictureFactory()
                 .getBuilder()
                 .image(path)
                 .crop(crop)
                 .effect(effect)
-                .stickers(stickers);
+                .stickers(stickers)
+                .maxBound(display.widthPixels, display.heightPixels);
 
-        PictureLoader loader = new PictureLoader(builder);
-        loader.load(this);
+        PictureLoader previewLoader = new PictureLoader(previewBuilder);
+        previewLoader.load(backgroundResultHandler);
+
+        PictureBuilder backgroundBuilder = PhotoEditorApplication.getPictureFactory()
+                .getBuilder()
+                .image(path)
+                .crop(crop)
+                .effect(effect)
+                .stickers(stickers)
+                .blur(PREVIEW_BLUR_RADIUS)
+                .maxBound(display.widthPixels / 2, display.heightPixels / 2);
+
+        PictureLoader backgroundLoader = new PictureLoader(backgroundBuilder);
+        backgroundLoader.load(previewResultHandler);
+    }
+
+    private void handlePreviewReady(Bitmap picture) {
+        mPreviewImage.setImageBitmap(picture);
+        mPreviewImage.animate().alpha(1).setDuration(getResources().
+                getInteger(R.integer.save_screen_picture_fade_anim_duration));
+    }
+
+    private void handleBackgroundReady(Bitmap picture) {
+        mBackgroundImage.setImageBitmap(picture);
+        mBackgroundImage.animate().alpha(1).setDuration(getResources().
+                getInteger(R.integer.save_screen_picture_fade_anim_duration));
+    }
+
+    private void handlePictureError() {
+        mPresenter.onFileError();
     }
 
     @Override

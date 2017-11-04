@@ -11,6 +11,6 @@
     <integer name="sticker_span_count">5</integer>
 
     <integer name="save_controls_fade_anim_duration">1000</integer>
-    <integer name="save_screen_picture_fade_anim_duration">300</integer>
+    <integer name="save_screen_picture_fade_anim_duration">600</integer>
     <integer name="save_screen_loader_cycle_anim_duration">1000</integer>
 </resources>

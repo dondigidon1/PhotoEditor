@@ -23,6 +23,7 @@ public class PictureLoader {
      * Начать создание изображения.
      *
      * @param listener Обработчик результата.
+     *                 Используется {@link WeakReference} для удержания ссылки на слушателя.
      */
     public void load(final ResultHandler listener) {
         new LoadTask(listener).start();
