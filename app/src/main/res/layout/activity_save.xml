@@ -9,6 +9,27 @@
     tools:context="com.redrocket.photoeditor.presentation.save.view.SaveActivity">
 
     <ImageView
+        android:id="@+id/image_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:scaleType="centerCrop"
+        android:alpha="0" />
+
+    <View
+        android:id="@+id/view_background_dim"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/colorPrimaryLightA110" />
+
+    <ImageView
         android:id="@+id/image_preview"
         android:layout_width="0dp"
         android:layout_height="0dp"

@@ -33,6 +33,7 @@ public class PictureBuilder {
     private static final String TAG = "PictureBuilder";
 
     private static final int NO_EFFECT = -1;
+    private static final int NO_BLUR_RADIUS = -1;
 
     private enum ScaleMode {
         SCALE_INSIDE, // остаться внутри границ
@@ -47,14 +48,15 @@ public class PictureBuilder {
     private CropArea mCrop = new CropArea();
     private int mEffect = NO_EFFECT;
     private List<Sticker> mStickers = null;
+    private int mBlurRadius = NO_BLUR_RADIUS;
 
     private ScaleMode mScaleMode;
     private int mWidthBound;
     private int mHeightBound;
 
-    public PictureBuilder(Context context,
-                          StickersTable stickersTable,
-                          EffectFactory effectsFactory) {
+    PictureBuilder(Context context,
+                   StickersTable stickersTable,
+                   EffectFactory effectsFactory) {
         mContext = context;
         mStickersTable = stickersTable;
         mEffectsFactory = effectsFactory;
@@ -77,6 +79,11 @@ public class PictureBuilder {
 
     public PictureBuilder stickers(@NonNull List<Sticker> stickers) {
         mStickers = stickers;
+        return this;
+    }
+
+    public PictureBuilder blur(@IntRange(from = 0) int radius) {
+        mBlurRadius = radius;
         return this;
     }
 
@@ -117,6 +124,10 @@ public class PictureBuilder {
             }
         }
 
+        if (mBlurRadius != NO_BLUR_RADIUS) {
+            bitmap = BitmapUtils.getBlurred(mContext, bitmap, mBlurRadius);
+        }
+
         return bitmap;
     }
 
@@ -148,9 +159,10 @@ public class PictureBuilder {
             options.inSampleSize = BitmapUtils.calcInSampleSize(
                     regionRect.width(), regionRect.height(),
                     minWidth, minHeight);
+            options.inMutable = true;
         }
 
-        BitmapRegionDecoder decoder = BitmapRegionDecoder.newInstance(path, true);
+        BitmapRegionDecoder decoder = BitmapRegionDecoder.newInstance(path, false);
         Bitmap bitmap = decoder.decodeRegion(regionRect, options);
 
         if (scaleMode != null) {
