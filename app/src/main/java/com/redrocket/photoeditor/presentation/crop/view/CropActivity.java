@@ -32,6 +32,7 @@ public class CropActivity
             CropScreenView,
             CropViewFacade.LoadListener,
             FileErrorDialog.OnDialogListener {
+
     private static final String TAG = "CropActivity";
 
     private static final String EXTRA_IMAGE_PATH = "EXTRA_IMAGE_PATH";

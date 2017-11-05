@@ -4,7 +4,10 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
+import android.support.v4.util.Pair;
 
+import com.redrocket.photoeditor.R;
 import com.redrocket.photoeditor.util.BitmapUtils;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -47,6 +50,18 @@ public class CropViewFacade
         if (mInitRect != null && error == null) {
             mLoadFinished = true;
             applyCropRect(mInitRect);
+
+            try {
+                Pair<Integer, Integer> dims = BitmapUtils.getDims(mPath);
+                ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) mCropImageView.getLayoutParams();
+                params.dimensionRatio = dims.first + ":" + dims.second;
+                mCropImageView.setLayoutParams(params);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            mCropImageView.animate().alpha(1f).setDuration(R.integer.crop_screen_cover_fade_anim_duration);
+
         } else if (error != null) {
             mListener.onFileError();
         }

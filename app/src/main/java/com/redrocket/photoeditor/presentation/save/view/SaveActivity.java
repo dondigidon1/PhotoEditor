@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.MenuItem;
@@ -309,6 +310,10 @@ public class SaveActivity
         mPreviewImage.setImageBitmap(picture);
         mPreviewImage.animate().alpha(1).setDuration(getResources().
                 getInteger(R.integer.save_screen_picture_fade_anim_duration));
+
+        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) mPreviewImage.getLayoutParams();
+        params.dimensionRatio = picture.getWidth() + ":" + picture.getHeight();
+        mPreviewImage.setLayoutParams(params);
     }
 
     private void handleBackgroundReady(Bitmap picture) {

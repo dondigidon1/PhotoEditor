@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryLight"
-    tools:context="com.redrocket.photoeditor.presentation.save.view.SaveActivity">
+    tools:context="com.redrocket.photoeditor.presentation.save.view.SaveActivity" >
 
     <ImageView
         android:id="@+id/image_background"
@@ -38,6 +38,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:elevation="@dimen/picture_elevation"
+        android:outlineProvider="bounds"
         android:alpha="0"/>
 
     <com.redrocket.photoeditor.presentation.save.view.CircleLoader
@@ -53,7 +55,8 @@
         app:ringWidth="14dp"
         app:rollerColor="@color/colorAccent"
         app:rollerSweepAngle="180"
-        app:rollerWidth="10dp"/>
+        app:rollerWidth="10dp"
+        android:elevation="@dimen/picture_elevation" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline_preview"
