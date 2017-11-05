@@ -1,6 +1,8 @@
 <resources>
     <dimen name="activity_margin">16dp</dimen>
 
+    <dimen name="picture_elevation">3dp</dimen>
+
     <dimen name="gallery_preview_spacing">2dp</dimen>
 
     <dimen name="crop_thumb_radius">12dp</dimen>

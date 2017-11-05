@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryLight"
-    tools:context="com.redrocket.photoeditor.presentation.effects.view.EffectActivity">
+    android:clipToPadding="false"
+    tools:context="com.redrocket.photoeditor.presentation.effects.view.EffectActivity" >
 
     <FrameLayout
         android:id="@+id/container_picture"
@@ -17,13 +18,16 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:clipToPadding="false"
         >
 
         <jp.co.cyberagent.android.gpuimage.GPUImageView
             android:id="@+id/gpu_image_picture"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:elevation="@dimen/picture_elevation"
+            android:outlineProvider="bounds" />
 
         <View
             android:id="@+id/cover"

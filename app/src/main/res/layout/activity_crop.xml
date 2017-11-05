@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryLight"
     android:padding="@dimen/activity_margin"
-    tools:context=".presentation.crop.view.CropActivity">
+    android:clipToPadding="false"
+    tools:context=".presentation.crop.view.CropActivity" >
 
     <com.theartofdev.edmodo.cropper.CropImageView
         android:id="@+id/crop_picture"
@@ -22,6 +23,9 @@
         app:cropBorderCornerThumbRadius="@dimen/crop_thumb_radius"
         app:cropMinCropWindowHeight="@dimen/crop_area_min_side"
         app:cropMinCropWindowWidth="@dimen/crop_area_min_side"
-        app:cropBorderLineColor="@color/colorAccent" />
+        app:cropBorderLineColor="@color/colorAccent"
+        android:clipChildren="false"
+        android:elevation="@dimen/picture_elevation"
+        android:outlineProvider="bounds" />
 
 </android.support.constraint.ConstraintLayout>
