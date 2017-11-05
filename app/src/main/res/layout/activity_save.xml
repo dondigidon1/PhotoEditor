@@ -88,6 +88,7 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/button_share"
+        style="?android:attr/buttonStyle"
         android:layout_width="@dimen/save_result_button_width"
         android:layout_height="@dimen/save_result_button_height"
         android:layout_marginTop="20dp"
@@ -95,9 +96,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_result"
         android:background="@drawable/btn_share"
-        android:clickable="true"
         android:visibility="invisible"
-        tools:visibility="visible">
+        tools:visibility="visible"
+        >
 
         <ImageView
             android:layout_width="24dp"
@@ -116,10 +117,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="@string/save_screen_button_share"
             android:textAllCaps="true"
             android:textColor="@color/colorTextIcons"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            android:textAppearance="?android:attr/textAppearanceButton"
+            android:text="@string/save_screen_button_share"
+            />
     </android.support.constraint.ConstraintLayout>
 
     <Button
@@ -132,7 +135,7 @@
         app:layout_constraintTop_toBottomOf="@+id/button_share"
         android:background="@drawable/btn_finish"
         android:text="@string/save_screen_button_finish"
-        android:textColor="@color/colorPrimaryText"
+        android:textColor="@color/colorTextIcons"
         android:textSize="16sp"
         android:visibility="invisible"
         tools:visibility="visible"/>

@@ -14,6 +14,6 @@
     <color name="colorDeviderA150">#96BDBDBD</color>
     <color name="colorTextIcons">#FFFFFF</color>
 
-    <color name="indigo">#3F51B5</color>
-    <color name="indigoA150">#963F51B5</color>
+    <color name="blue">#2196F3</color>
+    <color name="blueA150">#962196f3</color>
 </resources>

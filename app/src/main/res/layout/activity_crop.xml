@@ -26,6 +26,8 @@
         app:cropBorderLineColor="@color/colorAccent"
         android:clipChildren="false"
         android:elevation="@dimen/picture_elevation"
-        android:outlineProvider="bounds" />
+        android:outlineProvider="bounds"
+        android:alpha="0"
+        />
 
 </android.support.constraint.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.redrocket.photoeditor.presentation.crop.view.custom;
 
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.net.Uri;
@@ -54,13 +55,20 @@ public class CropViewFacade
             try {
                 Pair<Integer, Integer> dims = BitmapUtils.getDims(mPath);
                 ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) mCropImageView.getLayoutParams();
-                params.dimensionRatio = dims.first + ":" + dims.second;
+                if (BitmapUtils.getRotation(mPath) % 180 == 0) {
+                    params.dimensionRatio = dims.first + ":" + dims.second;
+                } else {
+                    params.dimensionRatio = dims.second + ":" + dims.first;
+                }
+
                 mCropImageView.setLayoutParams(params);
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-            mCropImageView.animate().alpha(1f).setDuration(R.integer.crop_screen_cover_fade_anim_duration);
+            Resources res = mCropImageView.getContext().getResources();
+            mCropImageView.animate().alpha(1).setDuration(
+                    res.getInteger(R.integer.crop_screen_cover_fade_anim_duration));
 
         } else if (error != null) {
             mListener.onFileError();
