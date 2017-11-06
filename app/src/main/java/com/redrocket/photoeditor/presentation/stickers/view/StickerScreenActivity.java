@@ -2,7 +2,9 @@ package com.redrocket.photoeditor.presentation.stickers.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.util.Pair;
@@ -21,13 +23,14 @@ import com.redrocket.photoeditor.business.structures.Sticker;
 import com.redrocket.photoeditor.presentation.common.dialogs.FileErrorDialog;
 import com.redrocket.photoeditor.presentation.common.picture.PictureBuilder;
 import com.redrocket.photoeditor.presentation.common.picture.PictureLoader;
+import com.redrocket.photoeditor.presentation.common.sticker.StickerCategory;
 import com.redrocket.photoeditor.presentation.common.sticker.StickerInfo;
 import com.redrocket.photoeditor.presentation.common.sticker.StickersTable;
-import com.redrocket.photoeditor.presentation.common.util.ItemOffsetDecor;
 import com.redrocket.photoeditor.presentation.gallery.view.GalleryActivity;
 import com.redrocket.photoeditor.presentation.save.view.SaveActivity;
 import com.redrocket.photoeditor.presentation.stickers.presenter.StickerScreenPresenter;
 import com.redrocket.photoeditor.presentation.stickers.presenter.StickerScreenPresenterImpl;
+import com.redrocket.photoeditor.presentation.stickers.view.pane.CategoryTabs;
 import com.redrocket.photoeditor.presentation.stickers.view.pane.StickersAdapter;
 import com.redrocket.photoeditor.presentation.stickers.view.stickerview.StickerBoard;
 import com.redrocket.photoeditor.presentation.stickers.view.stickerview.StickerState;
@@ -43,7 +46,8 @@ public class StickerScreenActivity
             StickerScreenView,
             StickersAdapter.OnStickerClickListener,
             PictureLoader.ResultHandler,
-            FileErrorDialog.OnDialogListener {
+            FileErrorDialog.OnDialogListener,
+            CategoryTabs.OnTabClickListener {
 
     private static final String TAG = "StickerScreenActivity";
 
@@ -55,7 +59,9 @@ public class StickerScreenActivity
 
     private ImageView mPictureImage;
     private RecyclerView mPreviews;
+    private StickersAdapter mAdapter;
     private StickerBoard mStickerBoard;
+    private CategoryTabs mTabs;
 
     private final StickersTable mStickersTable = new StickersTable();
 
@@ -83,15 +89,22 @@ public class StickerScreenActivity
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mPictureImage = (ImageView) findViewById(R.id.image_picture);
+        mTabs = (CategoryTabs) findViewById(R.id.tabs);
+        mTabs.setListener(this);
 
         mStickerBoard = (StickerBoard) findViewById(R.id.sticker_board);
 
         mPreviews = (RecyclerView) findViewById(R.id.rv_sticker_previews);
+        mPreviews.setHasFixedSize(true);
+        mPreviews.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                handleStickerSheetScroll();
+            }
+        });
         int spanCount = getResources().getInteger(R.integer.sticker_span_count);
         mPreviews.setLayoutManager(new GridLayoutManager(this, spanCount,
                 LinearLayoutManager.VERTICAL, false));
-        int spacing = getResources().getDimensionPixelOffset(R.dimen.sticker_preview_spacing);
-        mPreviews.addItemDecoration(new ItemOffsetDecor(spanCount, spacing));
 
         showStickerCollection();
 
@@ -172,9 +185,19 @@ public class StickerScreenActivity
     }
 
     @Override
-    public void onStickerClick(int pos) {
-        int id = mStickersTable.getStickers().get(pos).id;
-        mPresenter.onPickSticker(id);
+    public void onTabClick(int index) {
+        int pos = mAdapter.getCategoryFirstItemPos(index);
+        ((GridLayoutManager)mPreviews.getLayoutManager()).scrollToPositionWithOffset(pos,0);
+    }
+
+    @Override
+    public void onStickerClick(StickerInfo sticker) {
+        mPresenter.onPickSticker(sticker.id);
+    }
+
+    @Override
+    public void onCreditClick(String link) {
+        mPresenter.onLinkClick(link);
     }
 
     @Override
@@ -219,20 +242,55 @@ public class StickerScreenActivity
     }
 
     @Override
+    public void openLink(String link) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+        PackageManager packageManager = getPackageManager();
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivity(Intent.createChooser(intent, getResources().getString(R.string.sticker_link_open_chooser_title)));
+        }
+    }
+
+    @Override
     public void resetToGalleryScreen() {
         startActivity(GalleryActivity.getCallingIntent(this));
     }
 
+    private void handleStickerSheetScroll() {
+        int visibleItemPos = ((GridLayoutManager) mPreviews.getLayoutManager())
+                .findFirstCompletelyVisibleItemPosition();
+
+        int categoryIndex = mAdapter.getCategoryIndexByItemPos(visibleItemPos);
+        mTabs.setSelected(categoryIndex);
+    }
+
+    //TODO рефактор
     private void showStickerCollection() {
-        List<Integer> miniImages = new ArrayList<>();
-        List<StickerInfo> stickers = mStickersTable.getStickers();
-        for (StickerInfo sticker : stickers) {
-            miniImages.add(sticker.miniImage);
+        List<StickerCategory> categories = mStickersTable.getCategories();
+
+        mAdapter = new StickersAdapter(categories, this);
+        final GridLayoutManager layoutManager = (GridLayoutManager) mPreviews.getLayoutManager();
+        layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                int viewType = mAdapter.getItemViewType(position);
+                if (viewType == StickersAdapter.STICKER_VIEW_TYPE) {
+                    return 1;
+                } else if (viewType == StickersAdapter.CREDIT_VIEW_TYPE) {
+                    return layoutManager.getSpanCount();
+                } else {
+                    throw new IllegalStateException();
+                }
+            }
+        });
+
+        mPreviews.setAdapter(mAdapter);
+
+        List<Integer> icons = new ArrayList<>();
+        for(StickerCategory category : categories){
+            icons.add(category.getIcon());
         }
 
-        StickersAdapter adapter = new StickersAdapter(miniImages, this);
-
-        mPreviews.setAdapter(adapter);
+        mTabs.setTabs(icons);
     }
 
     private void handleSaveClick() {

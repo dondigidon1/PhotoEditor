@@ -34,4 +34,6 @@
     <string name="effect_art_name_text">Арт</string>
     <string name="effect_glory_name_text">Глори</string>
     <string name="effect_blues_name_text">Блюз</string>
+
+    <string name="sticker_link_open_chooser_title">Открыть ссылку с помощью:</string>
 </resources>

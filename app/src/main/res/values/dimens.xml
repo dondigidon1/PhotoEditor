@@ -15,7 +15,7 @@
     <dimen name="sticker_frame_btn_ic_padding">11dp</dimen>
     <dimen name="sticker_preview_spacing">4dp</dimen>
 
-    <dimen name="sticker_grid_padding_horizontal">12dp</dimen>
+    <dimen name="sticker_grid_padding_horizontal">14dp</dimen>
 
     <dimen name="save_result_button_width">250dp</dimen>
     <dimen name="save_result_button_height">45dp</dimen>

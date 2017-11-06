@@ -2,6 +2,7 @@ package com.redrocket.photoeditor.presentation.save.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -269,7 +270,10 @@ public class SaveActivity
         shareIntent.setType("image/jpeg");
         shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(path)));
 
-        startActivity(Intent.createChooser(shareIntent, getResources().getString(R.string.save_share)));
+        PackageManager packageManager = getPackageManager();
+        if (shareIntent.resolveActivity(packageManager) != null) {
+            startActivity(Intent.createChooser(shareIntent, getResources().getString(R.string.save_share)));
+        }
     }
 
     @Override

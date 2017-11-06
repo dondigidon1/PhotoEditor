@@ -37,4 +37,10 @@ public interface StickerScreenView extends MvpView {
      * Открыть экран сохранения.
      */
     void openSaveScreen();
+
+    /**
+     * Открыть ссылку.
+     * @param link Строка с url.
+     */
+    void openLink(String link);
 }
