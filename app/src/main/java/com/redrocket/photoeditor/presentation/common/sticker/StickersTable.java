@@ -16,57 +16,83 @@ import java.util.Map;
 public class StickersTable {
     private final List<StickerInfo> mStickers = new ArrayList<>();
     private final Map<Integer, StickerInfo> mStickerById = new HashMap<>();
-
     private int mLastId;
 
+    private final List<StickerCategory> mCategories = new ArrayList<>();
+
     public StickersTable() {
-        add(R.drawable.sticker_1, R.drawable.big_sticker_1, "sticker_1");
-        add(R.drawable.sticker_2, R.drawable.big_sticker_2, "sticker_2");
-        add(R.drawable.sticker_3, R.drawable.big_sticker_3, "sticker_3");
-        add(R.drawable.sticker_4, R.drawable.big_sticker_4, "sticker_4");
-        add(R.drawable.sticker_5, R.drawable.big_sticker_5, "sticker_5");
-        add(R.drawable.sticker_6, R.drawable.big_sticker_6, "sticker_6");
-        add(R.drawable.sticker_7, R.drawable.big_sticker_7, "sticker_7");
-        add(R.drawable.sticker_8, R.drawable.big_sticker_8, "sticker_8");
-        add(R.drawable.sticker_9, R.drawable.big_sticker_9, "sticker_9");
-        add(R.drawable.sticker_10, R.drawable.big_sticker_10, "sticker_10");
-        add(R.drawable.sticker_11, R.drawable.big_sticker_11, "sticker_11");
-        add(R.drawable.sticker_12, R.drawable.big_sticker_12, "sticker_12");
-        add(R.drawable.sticker_13, R.drawable.big_sticker_13, "sticker_13");
-        add(R.drawable.sticker_14, R.drawable.big_sticker_14, "sticker_14");
-        add(R.drawable.sticker_15, R.drawable.big_sticker_15, "sticker_15");
-        add(R.drawable.sticker_16, R.drawable.big_sticker_16, "sticker_16");
-        add(R.drawable.sticker_17, R.drawable.big_sticker_17, "sticker_17");
-        add(R.drawable.sticker_18, R.drawable.big_sticker_18, "sticker_18");
-        add(R.drawable.sticker_19, R.drawable.big_sticker_19, "sticker_19");
-        add(R.drawable.sticker_20, R.drawable.big_sticker_20, "sticker_20");
-        add(R.drawable.sticker_21, R.drawable.big_sticker_21, "sticker_21");
-        add(R.drawable.sticker_22, R.drawable.big_sticker_22, "sticker_22");
-        add(R.drawable.sticker_23, R.drawable.big_sticker_23, "sticker_23");
-        add(R.drawable.sticker_24, R.drawable.big_sticker_24, "sticker_24");
-        add(R.drawable.sticker_25, R.drawable.big_sticker_25, "sticker_25");
-        add(R.drawable.sticker_26, R.drawable.big_sticker_26, "sticker_26");
-        add(R.drawable.sticker_27, R.drawable.big_sticker_27, "sticker_27");
-        add(R.drawable.sticker_28, R.drawable.big_sticker_28, "sticker_28");
-        add(R.drawable.sticker_29, R.drawable.big_sticker_29, "sticker_29");
-        add(R.drawable.sticker_30, R.drawable.big_sticker_30, "sticker_30");
+
+        List<StickerInfo> smileStickers = new ArrayList<>();
+        smileStickers.add(createSticker(R.drawable.sticker_smile_1, R.drawable.big_sticker_smile_1, "sticker_8"));
+        smileStickers.add(createSticker(R.drawable.sticker_smile_2, R.drawable.big_sticker_smile_2, "sticker_9"));
+        smileStickers.add(createSticker(R.drawable.sticker_smile_3, R.drawable.big_sticker_smile_3, "sticker_10"));
+        smileStickers.add(createSticker(R.drawable.sticker_smile_4, R.drawable.big_sticker_smile_4, "sticker_11"));
+        smileStickers.add(createSticker(R.drawable.sticker_smile_5, R.drawable.big_sticker_smile_5, "sticker_12"));
+        smileStickers.add(createSticker(R.drawable.sticker_smile_6, R.drawable.big_sticker_smile_6, "sticker_13"));
+        smileStickers.add(createSticker(R.drawable.sticker_smile_7, R.drawable.big_sticker_smile_7, "sticker_14"));
+        smileStickers.add(createSticker(R.drawable.sticker_smile_8, R.drawable.big_sticker_smile_8, "sticker_8"));
+        smileStickers.add(createSticker(R.drawable.sticker_smile_9, R.drawable.big_sticker_smile_9, "sticker_9"));
+        smileStickers.add(createSticker(R.drawable.sticker_smile_10, R.drawable.big_sticker_smile_10, "sticker_10"));
+        smileStickers.add(createSticker(R.drawable.sticker_smile_11, R.drawable.big_sticker_smile_11, "sticker_11"));
+        smileStickers.add(createSticker(R.drawable.sticker_smile_12, R.drawable.big_sticker_smile_12, "sticker_12"));
+        smileStickers.add(createSticker(R.drawable.sticker_smile_13, R.drawable.big_sticker_smile_13, "sticker_13"));
+        smileStickers.add(createSticker(R.drawable.sticker_smile_14, R.drawable.big_sticker_smile_14, "sticker_14"));
+        smileStickers.add(createSticker(R.drawable.sticker_smile_15, R.drawable.big_sticker_smile_15, "sticker_13"));
+        smileStickers.add(createSticker(R.drawable.sticker_smile_16, R.drawable.big_sticker_smile_16, "sticker_14"));
+        StickerCategory smileCategory = new StickerCategory(
+                R.drawable.sticker_smile_1,
+                "https://www.freepik.com/free-vector/several-emoticons-in-flat-style_950559.htm",
+                smileStickers);
+        mCategories.add(smileCategory);
+
+        List<StickerInfo> travelStickers = new ArrayList<>();
+        travelStickers.add(createSticker(R.drawable.sticker_travel_1, R.drawable.big_sticker_travel_1, "sticker_8"));
+        travelStickers.add(createSticker(R.drawable.sticker_travel_2, R.drawable.big_sticker_travel_2, "sticker_9"));
+        travelStickers.add(createSticker(R.drawable.sticker_travel_3, R.drawable.big_sticker_travel_3, "sticker_10"));
+        travelStickers.add(createSticker(R.drawable.sticker_travel_4, R.drawable.big_sticker_travel_4, "sticker_11"));
+        travelStickers.add(createSticker(R.drawable.sticker_travel_5, R.drawable.big_sticker_travel_5, "sticker_12"));
+        travelStickers.add(createSticker(R.drawable.sticker_travel_6, R.drawable.big_sticker_travel_6, "sticker_13"));
+        travelStickers.add(createSticker(R.drawable.sticker_travel_7, R.drawable.big_sticker_travel_7, "sticker_14"));
+        travelStickers.add(createSticker(R.drawable.sticker_travel_8, R.drawable.big_sticker_travel_8, "sticker_8"));
+        travelStickers.add(createSticker(R.drawable.sticker_travel_9, R.drawable.big_sticker_travel_9, "sticker_9"));
+        StickerCategory travelCategory = new StickerCategory(
+                R.drawable.sticker_travel_7,
+                "https://www.freepik.com/free-vector/world-tourism-day-background-with-world-and-monuments_915534.htm",
+                travelStickers);
+        mCategories.add(travelCategory);
+
+        List<StickerInfo> maskStickers = new ArrayList<>();
+        maskStickers.add(createSticker(R.drawable.sticker_mask_1, R.drawable.big_sticker_mask_1, "sticker_8"));
+        maskStickers.add(createSticker(R.drawable.sticker_mask_2, R.drawable.big_sticker_mask_2, "sticker_9"));
+        maskStickers.add(createSticker(R.drawable.sticker_mask_3, R.drawable.big_sticker_mask_3, "sticker_10"));
+        maskStickers.add(createSticker(R.drawable.sticker_mask_4, R.drawable.big_sticker_mask_4, "sticker_11"));
+        maskStickers.add(createSticker(R.drawable.sticker_mask_5, R.drawable.big_sticker_mask_5, "sticker_12"));
+        maskStickers.add(createSticker(R.drawable.sticker_mask_6, R.drawable.big_sticker_mask_6, "sticker_13"));
+        maskStickers.add(createSticker(R.drawable.sticker_mask_7, R.drawable.big_sticker_mask_7, "sticker_14"));
+        maskStickers.add(createSticker(R.drawable.sticker_mask_8, R.drawable.big_sticker_mask_8, "sticker_8"));
+        maskStickers.add(createSticker(R.drawable.sticker_mask_9, R.drawable.big_sticker_mask_9, "sticker_9"));
+        maskStickers.add(createSticker(R.drawable.sticker_mask_10, R.drawable.big_sticker_mask_10, "sticker_10"));
+        maskStickers.add(createSticker(R.drawable.sticker_mask_11, R.drawable.big_sticker_mask_11, "sticker_11"));
+        maskStickers.add(createSticker(R.drawable.sticker_mask_12, R.drawable.big_sticker_mask_12, "sticker_12"));
+        maskStickers.add(createSticker(R.drawable.sticker_mask_13, R.drawable.big_sticker_mask_13, "sticker_13"));
+        maskStickers.add(createSticker(R.drawable.sticker_mask_14, R.drawable.big_sticker_mask_14, "sticker_14"));
+        maskStickers.add(createSticker(R.drawable.sticker_mask_15, R.drawable.big_sticker_mask_15, "sticker_13"));
+        maskStickers.add(createSticker(R.drawable.sticker_mask_16, R.drawable.big_sticker_mask_16, "sticker_14"));
+        StickerCategory maskCategory = new StickerCategory(
+                R.drawable.sticker_mask_16,
+                "https://www.freepik.com/free-vector/several-accessories-for-photo-booth_1039964.htm",
+                maskStickers);
+        mCategories.add(maskCategory);
     }
 
-    private void add(@DrawableRes int miniImage, @DrawableRes int bigImage, String name) {
+    private StickerInfo createSticker(@DrawableRes int miniImage, @DrawableRes int bigImage, String name) {
         int id = mLastId++;
         StickerInfo sticker = new StickerInfo(id, miniImage, bigImage, name);
 
         mStickerById.put(id, sticker);
         mStickers.add(sticker);
-    }
 
-    /**
-     * Получить все стикеры.
-     *
-     * @return Возращает коллекцию стикеров.
-     */
-    public List<StickerInfo> getStickers() {
-        return Collections.unmodifiableList(mStickers);
+        return sticker;
     }
 
     /**
@@ -77,5 +103,14 @@ public class StickersTable {
      */
     public StickerInfo getStickerById(int id) {
         return mStickerById.get(id);
+    }
+
+    /**
+     * Получить категории стикеров.
+     *
+     * @return Возвращает немодифицируемый набор.
+     */
+    public List<StickerCategory> getCategories() {
+        return Collections.unmodifiableList(mCategories);
     }
 }

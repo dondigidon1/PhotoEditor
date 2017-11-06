@@ -33,4 +33,11 @@ public interface StickerScreenPresenter extends MvpPresenter<StickerScreenView> 
      * Диалог с файловой ошибкой закрылся.
      */
     void onCloseFileErrorMsg();
+
+    /**
+     * Пользователь нажал на ссылку.
+     *
+     * @param link url в виде строки.
+     */
+    void onLinkClick(String link);
 }

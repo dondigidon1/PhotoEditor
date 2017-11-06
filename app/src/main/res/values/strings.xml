@@ -35,4 +35,7 @@
     <string name="save_result_msg">Picture saved to gallery.</string>
     <string name="save_screen_button_share">Share</string>
     <string name="save_screen_button_finish">Finish</string>
+
+    <string name="sticker_credit_text">Designed by Freepik</string>
+    <string name="sticker_link_open_chooser_title">Open link with:</string>
 </resources>

@@ -8,6 +8,8 @@ import android.view.View;
  * Реализует отступы между превьюшками в галерее.
  */
 public class ItemOffsetDecor extends RecyclerView.ItemDecoration {
+    private static final String TAG = "ItemOffsetDecor";
+
     private final int mSpanCount;
     private final int mSpacing;
 

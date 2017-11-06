@@ -58,4 +58,9 @@ public class StickerScreenPresenterImpl implements StickerScreenPresenter {
     public void onCloseFileErrorMsg() {
         mView.resetToGalleryScreen();
     }
+
+    @Override
+    public void onLinkClick(String link) {
+        mView.openLink(link);
+    }
 }
